@@ -16,7 +16,7 @@ class LoginController extends Controller
        if(Auth::attempt($request->only('email','password'))){
             return redirect('/');
         }
-        return redirect('login')->with('error', 'Email atau password salah.');
+        return redirect('login')->with('toast_success', 'Login Berhasil');
     }
 
     public function logout() {

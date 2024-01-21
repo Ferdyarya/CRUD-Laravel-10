@@ -42,7 +42,7 @@
         <div class="mb-3">
           <!-- /.col -->
           <div class="col-12">
-            <button href="/loginuser" type="submit" class="btn btn-dark btn-block">Log In</button>
+            <button action="{{ route('loginuser') }}" type="submit" class="btn btn-dark btn-block">Log In</button>
           </div>
           <!-- /.col -->
         </div>

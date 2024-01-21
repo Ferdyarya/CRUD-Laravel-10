@@ -40,17 +40,17 @@
         {{-- search --}}
         <div class="row g-3 align-items-center mb-4">
             <div class="col-auto">
-                <form action="masterpegawai" method="GET">
+                <form action="mastertoko" method="GET">
                     <input type="text" id="search" name="search" class="form-control" placeholder="Search">
                 </form>
             </div>
 
             {{-- Button Export PDF --}}
             <div class="col-auto">
-                <a href="{{ route('masterpegawai.create')}}" class="btn btn-success">
+                <a href="{{ route('mastertoko.create')}}" class="btn btn-success">
                     Tambah Data
                 </a>
-                <a href="{{ route('masterpegawaipdf')}}" class="btn btn-danger">
+                <a href="{{ route('mastertokopdf')}}" class="btn btn-danger">
                     Export PDF
                 </a>
             </div>
@@ -61,9 +61,10 @@
                 <thead>
                     <tr>
                         <th class="px-6 py-2">No</th>
-                        <th class="px-6 py-2">Kode</th>
-                        <th class="px-6 py-2">Nama</th>
-                        <th class="px-6 py-2">No Telepon</th>
+                        <th class="px-6 py-2">Kode Toko</th>
+                        <th class="px-6 py-2">Nama Toko</th>
+                        <th class="px-6 py-2">Pemilik Toko</th>
+                        <th class="px-6 py-2">Alamat</th>
                         <th class="px-6 py-2">Action</th>
                     </tr>
                 </thead>
@@ -71,17 +72,18 @@
                     @php
                     $no=1;
                     @endphp
-                    @foreach ($masterpegawai as $index => $item)
+                    @foreach ($mastertoko as $index => $item)
                     <tr>
-                        <th class="px-6 py-2">{{ $index + $masterpegawai->firstItem() }}</th>
+                        <th class="px-6 py-2">{{ $index + $mastertoko->firstItem() }}</th>
                         <td class="px-6 py-2">{{ $item->kode }}</td>
-                        <td class="px-6 py-2">{{ $item->nama }}</td>
-                        <td class="px-6 py-2">{{ $item->no_telp }}</td>
+                        <td class="px-6 py-2">{{ $item->namatoko }}</td>
+                        <td class="px-6 py-2">{{ $item->pemilik }}</td>
+                        <td class="px-6 py-2">{{ $item->alamat }}</td>
                         <td>
-                            <a href="{{ route('masterpegawai.edit', $item->id)}}" class="btn btn-primary">
+                            <a href="{{ route('mastertoko.edit', $item->id)}}" class="btn btn-primary">
                                 Edit
                             </a>
-                            <form action="{{ route('masterpegawai.destroy', $item->id) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('mastertoko.destroy', $item->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">Hapus</button>
@@ -91,7 +93,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $masterpegawai->links() }}
+            {{ $mastertoko->links() }}
         </div>
     </div>
 </div>

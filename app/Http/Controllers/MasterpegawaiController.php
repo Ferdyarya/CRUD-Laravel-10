@@ -8,55 +8,105 @@ use PDF;
 
 class MasterpegawaiController extends Controller
 {
-    public function index(Request $request){
-
+    // NEW
+    public function index(Request $request)
+    {
         if($request->has('search')){
-            $datapegawai = Masterpegawai::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(5);;
+            $masterpegawai = Masterpegawai::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(10);
         }else{
-            $datapegawai = Masterpegawai::paginate(5);
+            $masterpegawai = Masterpegawai::paginate(10);
         }
-        return view('masterpegawai.index', compact('datapegawai'));
-        // $datapegawai = Masterpegawai::all();
+        return view('masterpegawai.index',[
+            'masterpegawai' => $masterpegawai
+        ]);
     }
 
-    // Function Tambah data
-    public function tambahmasterpegawai()
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
         return view('masterpegawai.create');
     }
 
-    // Function Submit
-    public function insertmasterpegawai(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-        // dd($request->all());
-        Masterpegawai::create($request->all());
-        return redirect()->route('masterpegawai')->with('toast_success', 'Data Telah ditambahkan');
+        $data = $request->all();
+
+        Masterpegawai::create($data);
+
+        return redirect()->route('masterpegawai.index')->with('success', 'Data Telah ditambahkan');
     }
 
-    // Function Edit
-    public function tampildata($id){
-        $datapegawai = Masterpegawai::find($id);
-        // dd($data);
-        return view('masterpegawai.edit', compact('datapegawai'));
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        // $datapegawai = Masterpegawai::find($id);
+        // // dd($data);
+        // return view('masterpegawai.edit', compact('datapegawai'));
     }
 
-    public function updatedata(Request $request, $id){
-        $datapegawai = Masterpegawai::find($id);
-        $datapegawai->update($request->all());
-        return redirect()->route('masterpegawai')->with('toast_success', 'Data Telah diupdate');;
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Masterpegawai $masterpegawai)
+    {
+        return view('masterpegawai.edit', [
+            'item' => $masterpegawai
+        ]);
     }
 
-    // Function Hapus
-    public function delete($id) {
-        $datapegawai = Masterpegawai::find($id);
-        $datapegawai->delete();
-        return redirect()->route('masterpegawai')->with('toast_success', 'Data Telah dihapus');;
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Masterpegawai $masterpegawai)
+    {
+        $data = $request->all();
+
+        $masterpegawai->update($data);
+
+        //dd($data);
+
+        return redirect()->route('masterpegawai.index')->with('success', 'Data Telah diupdate');
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Masterpegawai $masterpegawai)
+    {
+        $masterpegawai->delete();
+        return redirect()->route('masterpegawai.index')->with('success', 'Data Telah dihapus');
     }
 
     public function masterpegawaipdf() {
-        $datapegawai = Masterpegawai::all();
+        $data = Masterpegawai::all();
 
-        $pdf = PDF::loadview('masterpegawai/masterdatapdf', ['datapegawai' => $datapegawai]);
+        $pdf = PDF::loadview('masterpegawai/masterdatapdf', ['masterpegawai' => $data]);
         return $pdf->download('laporan_masterdatapegawai.pdf');
     }
 

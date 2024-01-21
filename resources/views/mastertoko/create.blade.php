@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <!-- Required meta tags -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -15,31 +14,33 @@
 
 
 <body>
-    <h1 class="text-center mb-4">Edit Data Sales</h1>
+    <h1 class="text-center mb-4">Tambah Data Toko</h1>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action={{ route('masterpegawai.update', $item->id) }} enctype="multipart/form-data">
+                        <form method="POST" action={{ route('mastertoko.store') }} enctype="multipart/form-data">
                             @csrf
-                            @method('PUT')
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Kode</label>
-                                <input value="{{ $item->kode }}" type="number" name="kode" class="form-control"
-                                    id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan Kode"
-                                    required>
+                                <input value="{{ old('kode') }}" type="number" name="kode" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" placeholder="Masukan Kode Toko">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Nama</label>
-                                <input value="{{ $item->nama }}" type="text" name="nama" class="form-control"
-                                    id="exampleInputPassword1" placeholder="Masukan Nama" required>
+                                <input value="{{ old('namatoko') }}" type="text" name="namatoko" class="form-control" id="exampleInputPassword1"
+                                    placeholder="Masukan Nama Toko">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Nomor Telepon</label>
-                                <input value="{{ $item->no_telp }}" type="number" name="no_telp"
-                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Nomor Telpon"
-                                    required>
+                                <label for="exampleInputPassword1">Masukan Nama Pemilik Toko</label>
+                                <input value="{{ old('pemilik') }}" type="text" name="pemilik" class="form-control" id="exampleInputPassword1"
+                                    placeholder="Masukan Nama Pemilik Toko">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Masukan Alamat Toko</label>
+                                <input value="{{ old('alamat') }}" type="text" name="alamat" class="form-control" id="exampleInputPassword1"
+                                    placeholder="Masukan Alamat Toko">
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

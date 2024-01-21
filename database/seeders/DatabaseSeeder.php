@@ -26,24 +26,46 @@ class DatabaseSeeder extends Seeder
 
         // User Data
         User::create([
-            'name' => 'supervisor',
+            'name' => 'Reza',
             'email' => 'supervisor@gmail.com',
             'password' => bcrypt('1'),
             'roles' => 'supervisor'
         ]);
 
         User::create([
-            'name' => 'sales',
-            'email' => 'sales@gmail.com',
+            'name' => 'Hendra',
+            'email' => 'hendra@gmail.com',
             'password' => bcrypt('2'),
+            'roles' => 'sales'
+        ]);
+        User::create([
+            'name' => 'Erwin',
+            'email' => 'erwin@gmail.com',
+            'password' => bcrypt('3'),
+            'roles' => 'sales'
+        ]);
+        User::create([
+            'name' => 'Hero',
+            'email' => 'hero@gmail.com',
+            'password' => bcrypt('4'),
             'roles' => 'sales'
         ]);
 
         //MasterData
         Masterpegawai::create([
-            'kode' => '1111',
+            'kode' => 'MA1',
             'nama' => 'Hendra',
-            'no_telp' => '081999234478'
+            'no_telp' => '082399234478'
+        ]);
+        Masterpegawai::create([
+            'kode' => 'MA2',
+            'nama' => 'Erwin',
+            'no_telp' => '083399254321'
+        ]);
+        Masterpegawai::create([
+            'kode' => 'MA3',
+            'nama' => 'Hero',
+            'no_telp' => '08599921234'
         ]);
     }
 }
