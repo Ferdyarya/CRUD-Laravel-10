@@ -5,8 +5,9 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 // use App\Models\Masterpegawai;
-use App\Models\Masterpegawai;
 use App\Models\User;
+use App\Models\Mastertoko;
+use App\Models\Masterpegawai;
 use Illuminate\Database\Seeder;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\DB;
@@ -66,6 +67,27 @@ class DatabaseSeeder extends Seeder
             'kode' => 'MA3',
             'nama' => 'Hero',
             'no_telp' => '08599921234'
+        ]);
+
+        Mastertoko::create([
+            'kode' => 'TK1',
+            'namatoko' => 'Toko Ibu Hani',
+            'pemilik' => 'Hani Fitri',
+            'alamat' => 'Banjarbaru'
+        ]);
+
+        Mastertoko::create([
+            'kode' => 'TK2',
+            'namatoko' => 'Toko Ibu Gelis',
+            'pemilik' => 'Hj. Gelis',
+            'alamat' => 'Liang Anggang'
+        ]);
+
+        Mastertoko::create([
+            'kode' => 'TK3',
+            'namatoko' => 'Toko Sembako Sejahterah',
+            'pemilik' => 'Ibu Riska',
+            'alamat' => 'Landasan Ulin'
         ]);
     }
 }

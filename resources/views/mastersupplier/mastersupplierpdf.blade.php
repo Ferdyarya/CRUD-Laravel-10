@@ -78,7 +78,7 @@
     </div>
 
     <center>
-        <h5 class="mt-4">Laporan Master Data Toko</h5>
+        <h5 class="mt-4">Laporan Master Data Supplier</h5>
     </center>
 
 
@@ -90,9 +90,8 @@
             <tr>
                 <th>No</th>
                 <th>Kode</th>
-                <th>Nama Toko</th>
-                <th>Pemilik Toko</th>
-                <th>Alamat</th>
+                <th>Nama</th>
+                <th>Nomor Telepon</th>
                 {{-- <th>Tanggal</th> --}}
             </tr>
         </thead>
@@ -101,13 +100,12 @@
             $grandTotal = 0;
             @endphp --}}
 
-            @foreach ($mastertoko as $item )
+            @foreach ($datapegawai as $item )
             <tr>
                 <td class="border">{{ $loop->iteration }}</td>
                 <td class="border textmid">{{ $item->kode }}</td>
-                <td class="border textmid">{{ $item->namatoko }}</td>
-                <td class="border textmid">{{ $item->pemilik }}</td>
-                <td class="border textmid">{{ $item->alamat }}</td>
+                <td class="border textmid">{{ $item->nama }}</td>
+                <td class="border textmid">{{ $item->no_telp }}</td>
                 {{-- <td class="border px-6 py-4">{{ $item->tanggal->format('d M Y') }}</td> --}}
             </tr>
             @endforeach

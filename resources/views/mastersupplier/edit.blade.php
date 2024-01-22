@@ -15,35 +15,41 @@
 
 
 <body>
-    <h1 class="text-center mb-4">Edit Master Data Toko</h1>
+    <h1 class="text-center mb-4">Edit Master Data Supplier</h1>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action={{ route('mastertoko.update', $item->id) }} enctype="multipart/form-data">
+                        <form method="POST" action={{ route('mastersupplier.update', $item->id) }} enctype="multipart/form-data">
                             @csrf
                             {{-- @method('PUT') --}}
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Kode Toko</label>
-                                <input value="{{ $masterpegawai->kode }}" type="number" name="kode" class="form-control"
+                                <label for="exampleInputEmail1">NPWP </label>
+                                <input value="{{ $masterpegawai->npwp }}" type="number" name="npwp" class="form-control"
                                     id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan Kode Toko"
                                     required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Nama Toko</label>
-                                <input value="{{ $masterpegawai->namatoko }}" type="text" name="namatoko" class="form-control"
+                                <label for="exampleInputPassword1">Nama PT</label>
+                                <input value="{{ $masterpegawai->namapt }}" type="text" name="namapt" class="form-control"
                                     id="exampleInputPassword1" placeholder="Masukan Nama Toko" required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Pemilik</label>
-                                <input value="{{ $masterpegawai->pemilik }}" type="text" name="pemilik"
-                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Nama Pemilik Toko"
+                                <label for="exampleInputPassword1">Alamat</label>
+                                <input value="{{ $masterpegawai->alamat }}" type="text" name="alamat"
+                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Alamat Toko"
                                     required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Alamat Toko</label>
-                                <input value="{{ $masterpegawai->alamat }}" type="text" name="alamat"
+                                <label for="exampleInputPassword1">Email</label>
+                                <input value="{{ $masterpegawai->email }}" type="email" name="email"
+                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Alamat Toko"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">NO Telepon</label>
+                                <input value="{{ $masterpegawai->no_telp }}" type="number" name="no_telp"
                                     class="form-control" id="exampleInputPassword1" placeholder="Masukan Alamat Toko"
                                     required>
                             </div>

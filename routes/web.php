@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
 use App\Models\Masterpegawai;
+use App\Models\Mastersupplier;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MastertokoController;
 use App\Http\Controllers\MasterpegawaiController;
+use App\Http\Controllers\MastersupplierController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -43,11 +45,13 @@ Route::prefix('dashboard')->middleware(['auth:sanctum'])->group(function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('masterpegawai', MasterpegawaiController::class);
     Route::resource('mastertoko', MastertokoController::class);
+    Route::resource('mastersupplier', MastersupplierController::class);
 
 
 // cetak PDF
 Route::get('masterpegawaipdf', [MasterpegawaiController::class, 'masterpegawaipdf'])->name('masterpegawaipdf');
 Route::get('mastertokopdf', [MasterpegawaiController::class, 'mastertokopdf'])->name('mastertokopdf');
+Route::get('mastersupplierpdf', [MastersupplierController::class, 'mastersupplierpdf'])->name('mastersupplierpdf');
 
 
 

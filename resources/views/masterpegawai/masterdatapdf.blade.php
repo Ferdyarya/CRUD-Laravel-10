@@ -100,7 +100,7 @@
             $grandTotal = 0;
             @endphp --}}
 
-            @foreach ($datapegawai as $item )
+            @foreach ($masterpegawai as $item )
             <tr>
                 <td class="border">{{ $loop->iteration }}</td>
                 <td class="border textmid">{{ $item->kode }}</td>
