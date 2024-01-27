@@ -5,9 +5,12 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 // use App\Models\Masterpegawai;
+
+use App\Models\Masterbarang;
 use App\Models\User;
 use App\Models\Mastertoko;
 use App\Models\Masterpegawai;
+use App\Models\Mastersupplier;
 use Illuminate\Database\Seeder;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\DB;
@@ -89,5 +92,20 @@ class DatabaseSeeder extends Seeder
             'pemilik' => 'Ibu Riska',
             'alamat' => 'Landasan Ulin'
         ]);
+
+        Mastersupplier::create([
+            'npwp' => '123456789012000',
+            'namapt' => 'PT Indofood',
+            'alamat' => 'Sudirman Plaza Indofood Tower',
+            'email' => 'ptindofood@indofood.com',
+            'no_telp' => '08553321234'
+        ]);
+
+        Masterbarang::create([
+            'kodebarang' => 'TOD02B',
+            'namabarang' => 'Tissue Dynasty Toilet 180G',
+            'hargabarang' => '29000'
+        ]);
+
     }
 }

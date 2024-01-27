@@ -83,8 +83,6 @@ class MastersupplierController extends Controller
 
         $mastersupplier->update($data);
 
-        //dd($data);
-
         return redirect()->route('mastersupplier.index')->with('success', 'Data Telah diupdate');
 
     }
@@ -101,7 +99,7 @@ class MastersupplierController extends Controller
         return redirect()->route('mastersupplier.index')->with('success', 'Data Telah dihapus');
     }
 
-    public function Mastersupplierpdf() {
+    public function mastersupplierpdf() {
         $data = Mastersupplier::all();
 
         $pdf = PDF::loadview('mastersupplier/mastersupplierpdf', ['mastersupplier' => $data]);

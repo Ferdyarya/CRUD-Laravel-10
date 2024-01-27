@@ -44,4 +44,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function hakakses($roles) {
+        if ($this->roles === $roles){
+            return true;
+        }
+        return false;
+    }
 }
