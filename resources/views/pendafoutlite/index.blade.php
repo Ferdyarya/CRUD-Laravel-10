@@ -97,33 +97,31 @@
 
                         <td class="px-6 py-2">
                             @if ($item->status == 0)
-                            @if (Auth::user()->hakakses('supervisor'))
-                            <form action="{{ route('validasisales', $item->id) }}" method="POST">
-                                @csrf
-                                @method('patch')
-                                <select name="validasi" class="form-select" aria-label="Default select example">
-                                    <option selected>
-                                        Keterangan :
-                                    </option>
-                                    <option value="Approve">Approve</option>
-                                    <option value="Ditolak">Ditolak</option>
-                                </select>
-                                <button type="submit" class="btn btn-info mt-1">OK</button>
-                            </form>
+                                @if (Auth::user()->hakakses('supervisor'))
+                                    <form action="{{ route('validasisales', $item->id) }}" method="POST">
+                                        @csrf
+                                        @method('patch')
+                                        <select name="validasi" class="form-control" aria-label="Default select example">
+                                            <option value="" selected>Keterangan :</option>
+                                            <option value="Approve">Approve</option>
+                                            <option value="Ditolak">Ditolak</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-info mt-1">OK</button>
+                                    </form>
+                                @else
+                                    <span class="badge badge-warning">Tunggu Verifikasi</span>
+                                @endif
                             @else
-                            <span class="badge badge-warning">Tunggu Verifikasi</span>
-                            @endif
-                            @else
-                            <div class="text-center">
-                                {!! $item->status == 'Tunggu Approve'
-                                ? '<span class="">Sudah diapprove</span>'
-                                : '<span class="">Ditolak</span>' !!}
-                            </div>
+                                <div class="text-center">
+                                    <span class="{{ $item->status == 'Approve' ? 'badge badge-success' : 'badge badge-danger' }}">
+                                        {{ $item->status }}
+                                    </span>
+                                </div>
                             @endif
                         </td>
 
                         <td>
-                            <a href="{{ route('pendafoutlite.update', $item->id)}}" class="btn btn-primary">
+                            <a href="{{ route('pendafoutlite.edit', $item->id)}}" class="btn btn-primary">
                                 Edit
                             </a>
                             <form action="{{ route('pendafoutlite.destroy', $item->id) }}" method="POST"

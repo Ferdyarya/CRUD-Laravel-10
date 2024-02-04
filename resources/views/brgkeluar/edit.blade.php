@@ -11,27 +11,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 
-<title>Master Data Sales</title>
+<title>Barang Keluar</title>
 
 
 <body>
-    <h1 class="text-center mb-4">Edit Master Data Supplier</h1>
+    <h1 class="text-center mb-4">Edit Barang Keluar</h1>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('pendafoutlite.update', $item->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('brgkeluar.update', $item->id) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tanggal</label>
-                                <input value="{{ \Carbon\Carbon::parse($item->tanggal)->format('d-M-Y') }}" type="date" name="npwp" class="form-control"
-                                    id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan Tanggal"
-                                    required>
+                                <input value="{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}" type="date" name="npwp" class="form-control"
+                                    id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan Tanggal" required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Nama Sales</label>
+                                <label for="exampleInputPassword1">Supplier</label>
                                 <select name="id_pegawai" class="form-control">
                                     @foreach ($masterpegawai as $data)
                                     <option value="{{ $data->id }}">{{ $data->nama }}</option>
@@ -39,39 +38,33 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Kode Toko</label>
-                                <input value="{{ $item->kodetoko }}" type="text" name="kodetoko"
-                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Kode Toko"
+                                <label for="exampleInputPassword1">Kode Barang</label>
+                                <input value="{{ $item->kodebarang }}" type="text" name="kodebarang"
+                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Kode Barang"
                                     required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Nama Toko</label>
-                                <input value="{{ $item->namatoko }}" type="text" name="namatoko"
-                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Nama Toko"
+                                <label for="exampleInputPassword1">Nama Barang</label>
+                                <input value="{{ $item->namabarang }}" type="text" name="namabarang"
+                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Nama Barang"
                                     required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Pemilik Toko</label>
-                                <input value="{{ $item->pemiliktoko }}" type="text" name="pemiliktoko"
-                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Nama Pemilik"
+                                <label for="exampleInputPassword1">Toko Pemesan</label>
+                                <input value="{{ $item->tokopemesan }}" type="text" name="tokopemesan"
+                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Nama Toko Pemesanan"
                                     required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Alamat</label>
+                                <label for="exampleInputPassword1">Qty</label>
+                                <input value="{{ $item->qty }}" type="number" name="qty"
+                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Qty"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Qty</label>
                                 <input value="{{ $item->alamat }}" type="text" name="alamat"
                                     class="form-control" id="exampleInputPassword1" placeholder="Masukan Alamat"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Domisili</label>
-                                <input value="{{ $item->domisili }}" type="text" name="domisili"
-                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan domisili"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">No Teelepon</label>
-                                <input value="{{ $item->no_telp }}" type="text" name="domisili"
-                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan domisili"
                                     required>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>

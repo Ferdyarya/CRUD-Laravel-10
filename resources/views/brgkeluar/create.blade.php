@@ -10,17 +10,17 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 
-<title>Pendaftaran Outlite</title>
+<title>Barang Masuk</title>
 
 
 <body>
-    <h1 class="text-center mb-4">Tambah Data Pendaftaran Outlite</h1>
+    <h1 class="text-center mb-4">Tambah Data Barang Masuk</h1>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('pendafoutlite.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('brgkeluar.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Pilih Tanggal</label>
@@ -29,47 +29,42 @@
                                     placeholder="Pilih Tanggal">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Sales</label>
-                                <select name="id_sales" class="form-control">
+                                <label for="exampleInputPassword1">Sales Yang Proses</label>
+                                <select name="id_pegawai" class="form-control">
                                     @foreach ($masterpegawai as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Masukan Kode Toko</label>
-                                <input value="{{ old('kodetoko') }}" type="text" name="kodetoko" class="form-control"
-                                    placeholder="Masukan Kode Toko">
+                                <label for="exampleInputPassword1">Kode Barang</label>
+                                <input value="{{ $item->kodebarang }}" type="text" name="kodebarang"
+                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Kode Barang"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Masukan Nama Toko</label>
-                                <input value="{{ old('namatoko') }}" type="text" name="namatoko" class="form-control"
-                                    placeholder="Masukan Nama Toko">
+                                <label for="exampleInputPassword1">Nama Barang</label>
+                                <input value="{{ $item->namabarang }}" type="text" name="namabarang"
+                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Nama Barang"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Masukan Nama Pemilik</label>
-                                <input value="{{ old('pemiliktoko') }}" type="text" name="pemiliktoko"
-                                    class="form-control" placeholder="Masukan Nama Pemilik">
+                                <label for="exampleInputPassword1">Toko Pemesan</label>
+                                <input value="{{ $item->tokopemesan }}" type="text" name="tokopemesan"
+                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Nama Toko Pemesan"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Masukan Alamat</label>
-                                <input value="{{ old('alamat') }}" type="text" name="alamat" class="form-control"
-                                    placeholder="Masukan alamat">
+                                <label for="exampleInputPassword1">Qty</label>
+                                <input value="{{ $item->qty }}" type="number" name="qty"
+                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Qty"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Masukan Domisili</label>
-                                <input value="{{ old('domisili') }}" type="text" name="domisili" class="form-control"
-                                    placeholder="Masukan domisili">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Masukan Foto KTP</label>
-                                <input {{-- value="{{ old('fotoktp') }}" --}} type="file" name="fotoktp" class="form-control"
-                                    placeholder="Masukan Foto KTP">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Masukan Nomor Telepon</label>
-                                <input value="{{ old('no_telp') }}" type="number" name="no_telp" class="form-control"
-                                    placeholder="Masukan Nomor Telepon">
+                                <label for="exampleInputPassword1">Alamat</label>
+                                <input value="{{ $item->alamat }}" type="text" name="alamat"
+                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Alamat"
+                                    required>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

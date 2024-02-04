@@ -16,12 +16,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Master Data Sales</h1>
+                    <h1 class="m-0">Master Data Toko</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Master Data Sales</li>
+                        <li class="breadcrumb-item active">Master Data Toko</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -80,7 +80,7 @@
                         <td class="px-6 py-2">{{ $item->pemilik }}</td>
                         <td class="px-6 py-2">{{ $item->alamat }}</td>
                         <td>
-                            <a href="{{ route('mastertoko.update', $item->id)}}" class="btn btn-primary">
+                            <a href="{{ route('mastertoko.edit', $item->id)}}" class="btn btn-primary">
                                 Edit
                             </a>
                             <form action="{{ route('mastertoko.destroy', $item->id) }}" method="POST" style="display:inline;">

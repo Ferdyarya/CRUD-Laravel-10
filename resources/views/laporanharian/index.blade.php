@@ -16,12 +16,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Master Data Supplier</h1>
+                    <h1 class="m-0">Laporan Harian</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Master Data Supplier</li>
+                        <li class="breadcrumb-item active">Laporan Harian Sales</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -40,17 +40,17 @@
         {{-- search --}}
         <div class="row g-3 align-items-center mb-4">
             <div class="col-auto">
-                <form action="mastersupplier" method="GET">
+                <form action="laporanharian" method="GET">
                     <input type="text" id="search" name="search" class="form-control" placeholder="Search">
                 </form>
             </div>
 
             {{-- Button Export PDF --}}
             <div class="col-auto">
-                <a href="{{ route('mastersupplier.create')}}" class="btn btn-success">
+                <a href="{{ route('laporanharian.create')}}" class="btn btn-success">
                     Tambah Data
                 </a>
-                <a href="{{ route('mastersupplierpdf')}}" class="btn btn-danger">
+                <a href="{{ route('laporanharianpdf')}}" class="btn btn-danger">
                     Export PDF
                 </a>
             </div>
@@ -60,32 +60,43 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="px-6 py-2">No</th>
-                        <th class="px-6 py-2">NPWP</th>
-                        <th class="px-6 py-2">Supplier</th>
-                        <th class="px-6 py-2">Alamat</th>
-                        <th class="px-6 py-2">Email</th>
-                        <th class="px-6 py-2">No Telepon</th>
-                        <th class="px-6 py-2">Action</th>
+                        <th class="px-6 py-6">No</th>
+                        <th class="px-6 py-6">Tanggal</th>
+                        <th class="px-6 py-6">Nama Sales</th>
+                        <th class="px-6 py-6">Area</th>
+                        <th class="px-6 py-6">Chanel</th>
+                        <th class="px-6 py-6">Call</th>
+                        <th class="px-6 py-6">EC</th>
+                        <th class="px-6 py-6">Akumulasi EC</th>
+                        <th class="px-6 py-6">Target Harian</th>
+                        <th class="px-6 py-6">Aktual Harian</th>
+                        <th class="px-6 py-6">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @php
                     $no=1;
                     @endphp
-                    @foreach ($mastersupplier as $index => $item)
+                    @foreach ($laporanharian as $index => $item)
                     <tr>
-                        <th class="px-6 py-2">{{ $index + $mastersupplier->firstItem() }}</th>
-                        <td class="px-6 py-2">{{ $item->npwp }}</td>
-                        <td class="px-6 py-2">{{ $item->namapt }}</td>
-                        <td class="px-6 py-2">{{ $item->alamat }}</td>
-                        <td class="px-6 py-2">{{ $item->email }}</td>
-                        <td class="px-6 py-2">{{ $item->no_telp }}</td>
+                        <th class="px-6 py-6">{{ $index + $laporanharian->firstItem() }}</th>
+                        <td class="px-6 py-6">
+                            {{ \Carbon\Carbon::parse($item->tanggal)->format('d-M-Y') }}
+                        </td>
+                        <td class="px-6 py-6">{{ $item->masterpegawai->nama }}</td>
+                        <td class="px-6 py-6">{{ $item->area }}</td>
+                        <td class="px-6 py-6">{{ $item->chanel }}</td>
+                        <td class="px-6 py-6">{{ $item->call }}</td>
+                        <td class="px-6 py-6">{{ $item->ec }}</td>
+                        <td class="px-6 py-6">{{ $item->akumulasiec }}</td>
+                        <td class="px-6 py-6">Rp. {{ number_format($item->targetharian) }}</td>
+                        <td class="px-6 py-6">Rp. {{ number_format($item->aktualharian) }}</td>
                         <td>
-                            <a href="{{ route('mastersupplier.edit', $item->id)}}" class="btn btn-primary" >
+                            <a href="{{ route('laporanharian.edit', $item->id)}}" class="btn btn-primary">
                                 Edit
                             </a>
-                            <form action="{{ route('mastersupplier.destroy', $item->id) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('laporanharian.destroy', $item->id) }}" method="POST"
+                                style="display:inline;">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">Hapus</button>
@@ -95,7 +106,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $mastersupplier->links() }}
+            {{ $laporanharian->links() }}
         </div>
     </div>
 </div>

@@ -15,29 +15,29 @@
 
 
 <body>
-    <h1 class="text-center mb-4">Edit Master Data Barang</h1>
+    <h1 class="text-center mb-4">Edit Master Data Bahan Baku</h1>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action={{ route('masterbarang.update', $item->id) }} enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('masterbarang.update', $item->id) }}" enctype="multipart/form-data">
                             @csrf
-                            {{-- @method('PUT') --}}
+                            @method('PUT')
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Kode Produk</label>
-                                <input value="{{ $masterpegawai->kodebarang }}" type="number" name="kodebarang" class="form-control"
+                                <input value="{{ $item->kodebarang }}" type="text" name="kodebarang" class="form-control"
                                     id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan Kode Toko"
                                     required>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Nama Produk</label>
-                                <input value="{{ $masterpegawai->namabarang }}" type="text" name="namabarang" class="form-control"
+                                <input value="{{ $item->namabarang }}" type="text" name="namabarang" class="form-control"
                                     id="exampleInputPassword1" placeholder="Masukan Nama Toko" required>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Harga</label>
-                                <input value="{{ $masterpegawai->hargabarang }}" type="text" name="hargabarang"
+                                <input value="{{ $item->hargabarang }}" type="text" name="hargabarang"
                                     class="form-control" id="exampleInputPassword1" placeholder="Masukan Nama Pemilik Toko"
                                     required>
                             </div>

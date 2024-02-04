@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Masterpegawai;
 use App\Models\Pendafoutlite;
+use PDF;
 
 class PendafoutliteController extends Controller
 {
@@ -76,8 +77,10 @@ class PendafoutliteController extends Controller
      */
     public function edit(Pendafoutlite $pendafoutlite)
     {
+        $masterpegawai = Masterpegawai::all();
         return view('pendafoutlite.edit', [
-            'item' => $pendafoutlite
+            'item' => $pendafoutlite,
+            'masterpegawai' => $masterpegawai,
         ]);
     }
 
@@ -115,5 +118,18 @@ class PendafoutliteController extends Controller
 
         $pdf = PDF::loadview('pendafoutlite/pendafoutlitepdf', ['pendafoutlite' => $data]);
         return $pdf->download('laporan_pendafoutlite.pdf');
+    }
+
+    public function validasi(Request $request, $id)
+    {
+        $pendafoutlite = Pendafoutlite::find($id);
+        // $email= $pendafoutlite->customermaster->email;
+        if ($request->has('validasi')) {
+            $pendafoutlite->update([
+                'status' => $request->validasi
+            ]);
+
+        }
+        return redirect()->route('pendafoutlite.index')->with('success', 'Data Telah diupdate');
     }
 }

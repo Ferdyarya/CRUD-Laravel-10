@@ -10,17 +10,17 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 
-<title>Pendaftaran Outlite</title>
+<title>Laporan Harian</title>
 
 
 <body>
-    <h1 class="text-center mb-4">Tambah Data Pendaftaran Outlite</h1>
+    <h1 class="text-center mb-4">Tambah Data Laporan Harian</h1>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('pendafoutlite.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('laporanharian.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Pilih Tanggal</label>
@@ -29,47 +29,55 @@
                                     placeholder="Pilih Tanggal">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Sales</label>
-                                <select name="id_sales" class="form-control">
+                                <label for="exampleInputPassword1">Nama Sales</label>
+                                <select name="id_pegawai" class="form-control">
                                     @foreach ($masterpegawai as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Masukan Kode Toko</label>
-                                <input value="{{ old('kodetoko') }}" type="text" name="kodetoko" class="form-control"
-                                    placeholder="Masukan Kode Toko">
+                                <label for="exampleInputPassword1">Area</label>
+                                <input value="{{ $item->area }}" type="text" name="area"
+                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Area"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Masukan Nama Toko</label>
-                                <input value="{{ old('namatoko') }}" type="text" name="namatoko" class="form-control"
-                                    placeholder="Masukan Nama Toko">
+                                <label for="exampleInputPassword1">Channel</label>
+                                <select name="chanel" class="form-control" id="exampleInputPassword1" required>
+                                    <option value="MT MODERN TRATE" {{ $item->chanel == 'MT MODERN TRATE' ? 'selected' : '' }}>MT MODERN TRATE</option>
+                                    <option value="GENERAL TRATE" {{ $item->chanel == 'GENERAL TRATE' ? 'selected' : '' }}>GENERAL TRATE</option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Masukan Nama Pemilik</label>
-                                <input value="{{ old('pemiliktoko') }}" type="text" name="pemiliktoko"
-                                    class="form-control" placeholder="Masukan Nama Pemilik">
+                                <label for="exampleInputPassword1">Call</label>
+                                <input value="{{ $item->call }}" type="number" name="call"
+                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Call Hari ini"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Masukan Alamat</label>
-                                <input value="{{ old('alamat') }}" type="text" name="alamat" class="form-control"
-                                    placeholder="Masukan alamat">
+                                <label for="exampleInputPassword1">EC</label>
+                                <input value="{{ $item->ec }}" type="number" name="ec"
+                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan EC Hari Ini"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Masukan Domisili</label>
-                                <input value="{{ old('domisili') }}" type="text" name="domisili" class="form-control"
-                                    placeholder="Masukan domisili">
+                                <label for="exampleInputPassword1">Akumulasi EC</label>
+                                <input value="{{ $item->akumulasiec }}" type="number" name="akumulasiec"
+                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Akumulasi EC"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Masukan Foto KTP</label>
-                                <input {{-- value="{{ old('fotoktp') }}" --}} type="file" name="fotoktp" class="form-control"
-                                    placeholder="Masukan Foto KTP">
+                                <label for="exampleInputPassword1">Target Harian</label>
+                                <input value="{{ $item->targetharian }}" type="number" name="targetharian"
+                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Target Harian"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Masukan Nomor Telepon</label>
-                                <input value="{{ old('no_telp') }}" type="number" name="no_telp" class="form-control"
-                                    placeholder="Masukan Nomor Telepon">
+                                <label for="exampleInputPassword1">Aktual Harian</label>
+                                <input value="{{ $item->aktualharian }}" type="number" name="aktualharian"
+                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Aktual Harian"
+                                    required>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

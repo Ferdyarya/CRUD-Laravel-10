@@ -11,4 +11,5 @@ class Masterbarang extends Model
     protected $fillable = [
         'namabarang', 'kodebarang', 'hargabarang'
     ];
+
 }

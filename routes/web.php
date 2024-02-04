@@ -1,13 +1,18 @@
 <?php
 
+use App\Models\Brgmasuk;
+use App\Models\Laporanharian;
 use App\Models\Masterpegawai;
 use App\Models\Pendafoutlite;
 use App\Models\Mastersupplier;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\BrgmasukController;
+use App\Http\Controllers\BrgkeluarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MastertokoController;
 use App\Http\Controllers\MasterbarangController;
+use App\Http\Controllers\LaporanharianController;
 use App\Http\Controllers\MasterpegawaiController;
 use App\Http\Controllers\PendafoutliteController;
 use App\Http\Controllers\MastersupplierController;
@@ -41,6 +46,10 @@ Route::prefix('dashboard')->middleware(['auth:sanctum'])->group(function() {
 
 // Data Tables
     Route::resource('pendafoutlite', PendafoutliteController::class);
+    Route::resource('brgmasuk', BrgmasukController::class);
+    Route::resource('brgkeluar', BrgkeluarController::class);
+    Route::resource('laporanharian', LaporanharianController::class);
+
 
 
 // cetak PDF
@@ -49,13 +58,19 @@ Route::get('masterpegawaipdf', [MasterpegawaiController::class, 'masterpegawaipd
 Route::get('mastertokopdf', [MasterpegawaiController::class, 'mastertokopdf'])->name('mastertokopdf');
 Route::get('mastersupplierpdf', [MastersupplierController::class, 'mastersupplierpdf'])->name('mastersupplierpdf');
 Route::get('masterbarangpdf', [MastersupplierController::class, 'masterbarangpdf'])->name('masterbarangpdf');
+Route::get('laporanharianpdf', [LaporanharianController::class, 'laporanharianpdf'])->name('laporanharianpdf');
+
 
 // Data Tables
 Route::get('pendafoutlitepdf', [PendafoutliteController::class, 'pendafoutlitepdf'])->name('pendafoutlitepdf');
+Route::get('brgmasukpdf', [BrgmasukController::class, 'brgmasukpdf'])->name('brgmasukpdf');
+Route::get('brgkeluarpdf', [BrgkeluarController::class, 'brgkeluarpdf'])->name('brgkeluarpdf');
+Route::get('laporanharianpdf', [LaporanharianController::class, 'laporanharianpdf'])->name('laporanharianpdf');
 
 
 // Validasi
 Route::patch('sales/{id}/validasi', [PendafoutliteController::class, 'validasi'])->name('validasisales');
+
 
 
 });

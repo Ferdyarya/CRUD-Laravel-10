@@ -66,7 +66,7 @@ class MasterbarangController extends Controller
     public function edit(Masterbarang $masterbarang)
     {
         return view('masterbarang.edit', [
-            'item' => $masterbarang
+            'item' => $masterbarang,
         ]);
     }
 

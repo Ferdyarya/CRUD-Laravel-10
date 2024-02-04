@@ -78,7 +78,7 @@
     </div>
 
     <center>
-        <h5 class="mt-4">Laporan Master Data Supplier</h5>
+        <h5 class="mt-4">Laporan Barang Keluar</h5>
     </center>
 
 
@@ -91,15 +91,11 @@
                 <th>No</th>
                 <th>Tanggal</th>
                 <th>Sales</th>
-                <th>Kode Toko</th>
-                <th>Nama Toko</th>
-                <th>Pemilik</th>
-                <th>Alamat</th>
-                <th>Domisili</th>
-                <th>No Telepon</th>
-                <th>Foto KTP</th>
-                <th>Status</th>
-                {{-- <th>Tanggal</th> --}}
+                <th>Kode Barang</th>
+                <th>Nama Barang</th>
+                <th>Toko Pemesan</th>
+                <th>Qty</th>
+                <th>Alamat Kirim</th>
             </tr>
         </thead>
         <tbody>
@@ -107,20 +103,16 @@
             $grandTotal = 0;
             @endphp --}}
 
-            @foreach ($pendafoutlite as $item )
+            @foreach ($brgkeluar as $item )
             <tr>
                 <td class="border">{{ $loop->iteration }}</td>
                 <td class="border textmid">{{ \Carbon\Carbon::parse($item->tanggal)->format('d-M-Y') }}</td>
-                <td class="border textmid">{{ $item->id_sales }}</td>
-                <td class="border textmid">{{ $item->kodetoko }}</td>
-                <td class="border textmid">{{ $item->namatoko }}</td>
-                <td class="border textmid">{{ $item->pemiliktoko }}</td>
+                <td class="border textmid">{{ $item->masterpegawai->nama }}</td>
+                <td class="border textmid">{{ $item->kodebarang }}</td>
+                <td class="border textmid">{{ $item->namabarang }}</td>
+                <td class="border textmid">{{ $item->tokopemesan }}</td>
+                <td class="border textmid">{{ $item->qty }}</td>
                 <td class="border textmid">{{ $item->alamat }}</td>
-                <td class="border textmid">{{ $item->domisili }}</td>
-                <td class="border textmid">{{ $item->no_telp }}</td>
-                <td class="border textmid"><img src="{{ public_path('fotoktp/' . $item->fotoktp) }}" width="80px" />
-                </td>
-                <td class="border textmid">{{ $item->status }}</td>
                 {{-- <td class="border px-6 py-4">{{ $item->tanggal->format('d M Y') }}</td> --}}
             </tr>
             @endforeach

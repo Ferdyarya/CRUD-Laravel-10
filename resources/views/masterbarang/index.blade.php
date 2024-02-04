@@ -78,7 +78,7 @@
                         <td class="px-6 py-2">{{ $item->namabarang }}</td>
                         <td class="px-6 py-2">Rp. {{ number_format($item->hargabarang )}}</td>
                         <td>
-                            <a href="{{ route('masterbarang.update', $item->id)}}" class="btn btn-primary">
+                            <a href="{{ route('masterbarang.edit', $item->id)}}" class="btn btn-primary">
                                 Edit
                             </a>
                             <form action="{{ route('masterbarang.destroy', $item->id) }}" method="POST" style="display:inline;">

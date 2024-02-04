@@ -20,11 +20,11 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action={{ route('masterpegawai.store') }} enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('masterpegawai.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Kode</label>
-                                <input value="{{ old('kode') }}" type="number" name="kode" class="form-control" id="exampleInputEmail1"
+                                <input value="{{ old('kode') }}" type="text" name="kode" class="form-control" id="exampleInputEmail1"
                                     aria-describedby="emailHelp" placeholder="Masukan Kode">
                             </div>
                             <div class="form-group">

@@ -78,7 +78,7 @@
     </div>
 
     <center>
-        <h5 class="mt-4">Laporan Master Data Supplier</h5>
+        <h5 class="mt-4">Report Laporan harian</h5>
     </center>
 
 
@@ -90,16 +90,14 @@
             <tr>
                 <th>No</th>
                 <th>Tanggal</th>
-                <th>Sales</th>
-                <th>Kode Toko</th>
-                <th>Nama Toko</th>
-                <th>Pemilik</th>
-                <th>Alamat</th>
-                <th>Domisili</th>
-                <th>No Telepon</th>
-                <th>Foto KTP</th>
-                <th>Status</th>
-                {{-- <th>Tanggal</th> --}}
+                <th>Nama Sales</th>
+                <th>Area</th>
+                <th>Chanel</th>
+                <th>Call</th>
+                <th>EC</th>
+                <th>Akumulasi EC</th>
+                <th>Target Harian</th>
+                <th>Aktual Harian</th>
             </tr>
         </thead>
         <tbody>
@@ -107,20 +105,18 @@
             $grandTotal = 0;
             @endphp --}}
 
-            @foreach ($pendafoutlite as $item )
+            @foreach ($laporanharian as $item )
             <tr>
                 <td class="border">{{ $loop->iteration }}</td>
                 <td class="border textmid">{{ \Carbon\Carbon::parse($item->tanggal)->format('d-M-Y') }}</td>
-                <td class="border textmid">{{ $item->id_sales }}</td>
-                <td class="border textmid">{{ $item->kodetoko }}</td>
-                <td class="border textmid">{{ $item->namatoko }}</td>
-                <td class="border textmid">{{ $item->pemiliktoko }}</td>
-                <td class="border textmid">{{ $item->alamat }}</td>
-                <td class="border textmid">{{ $item->domisili }}</td>
-                <td class="border textmid">{{ $item->no_telp }}</td>
-                <td class="border textmid"><img src="{{ public_path('fotoktp/' . $item->fotoktp) }}" width="80px" />
-                </td>
-                <td class="border textmid">{{ $item->status }}</td>
+                <td class="border textmid">{{ $item->masterpegawai->nama }}</td>
+                <td class="border textmid">{{ $item->area }}</td>
+                <td class="border textmid">{{ $item->chanel }}</td>
+                <td class="border textmid">{{ $item->call }}</td>
+                <td class="border textmid">{{ $item->ec }}</td>
+                <td class="border textmid">{{ $item->akumulasiec }}</td>
+                <td class="border textmid">Rp. {{ number_format($item->targetharian) }}</td>
+                <td class="border textmid">Rp. {{ number_format($item->aktualharian) }}</td>
                 {{-- <td class="border px-6 py-4">{{ $item->tanggal->format('d M Y') }}</td> --}}
             </tr>
             @endforeach

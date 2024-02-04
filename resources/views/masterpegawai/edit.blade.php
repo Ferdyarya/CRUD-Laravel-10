@@ -21,12 +21,12 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action={{ route('masterpegawai.update', $item->id) }} enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('masterpegawai.update', $item->id) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Kode</label>
-                                <input value="{{ $item->kode }}" type="number" name="kode" class="form-control"
+                                <input value="{{ $item->kode }}" type="text" name="kode" class="form-control"
                                     id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan Kode"
                                     required>
                             </div>
