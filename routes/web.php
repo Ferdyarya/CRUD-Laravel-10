@@ -61,17 +61,25 @@ Route::get('masterbarangpdf', [MastersupplierController::class, 'masterbarangpdf
 Route::get('laporanharianpdf', [LaporanharianController::class, 'laporanharianpdf'])->name('laporanharianpdf');
 
 
+
 // Data Tables
 Route::get('pendafoutlitepdf', [PendafoutliteController::class, 'pendafoutlitepdf'])->name('pendafoutlitepdf');
 Route::get('brgmasukpdf', [BrgmasukController::class, 'brgmasukpdf'])->name('brgmasukpdf');
 Route::get('brgkeluarpdf', [BrgkeluarController::class, 'brgkeluarpdf'])->name('brgkeluarpdf');
 Route::get('laporanharianpdf', [LaporanharianController::class, 'laporanharianpdf'])->name('laporanharianpdf');
+// Route::get('pernamapdf', [LaporanharianController::class, 'pernamapdf'])->name('pernamapdf');
+
 
 
 // Validasi
 Route::patch('sales/{id}/validasi', [PendafoutliteController::class, 'validasi'])->name('validasisales');
 
+// Recap
+Route::get('laporansales/pernama', [PendafoutliteController::class, 'pernama'])->name('pernama');
 
+
+// Filter
+Route::get('pernamapdf/filter={filter}', [PendafoutliteController::class, 'pernama_pdf'])->name('pernamapdf');
 
 });
 

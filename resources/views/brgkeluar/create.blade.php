@@ -49,10 +49,12 @@
                                     required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Toko Pemesan</label>
-                                <input value="{{ $item->tokopemesan }}" type="text" name="tokopemesan"
-                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Nama Toko Pemesan"
-                                    required>
+                                <label for="exampleInputPassword1">Sales Yang Proses</label>
+                                <select name="id_toko" class="form-control">
+                                    @foreach ($mastertoko as $item)
+                                    <option value="{{ $item->id }}">{{ $item->namatoko }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Qty</label>

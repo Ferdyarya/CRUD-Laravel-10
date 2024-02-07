@@ -16,12 +16,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Pendaftaran Outlite</h1>
+                    <h1 class="m-0">Rekap Laporan Sales Pemegang Toko</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Pendaftaran Outlite</li>
+                        <li class="breadcrumb-item active">Rekap Laporan Sales Pemegang Toko</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -46,13 +46,39 @@
             </div>
 
             {{-- Button Export PDF --}}
-            <div class="col-auto">
-                <a href="{{ route('pendafoutlite.create')}}" class="btn btn-success">
+            <div class="col-auto row">
+                {{-- <a href="{{ route('pendafoutlite.create')}}" class="btn btn-success">
                     Tambah Data
-                </a>
-                <a href="{{ route('pendafoutlitepdf')}}" class="btn btn-danger">
+                </a> --}}
+                {{-- <a href="{{ route('pendafoutlitepdf')}}" class="btn btn-danger">
                     Export PDF
-                </a>
+                </a> --}}
+
+                @if (!empty($filter))
+                <a href="{{ route('pernamapdf', $filter) }}" class="btn btn-danger">Export PDF</a>
+                @else
+                <a href="{{ route('pernamapdf','all') }}" class="btn btn-danger">Export PDF</a>
+                @endif
+                <div class="ml-2">
+                    <form action="{{ url()->current() }}">
+                        <div class="input-group">
+                            <select name="filter" class="form-control rounded">
+                                <option value="">FILTER</option>
+                                @if (!empty($filter))
+                                <option value="all">SHOW ALL</option>
+                                @endif
+                                @foreach ($id_sales as $item)
+                                <option value="{{ $item->id_sales }}" {{ $item->id_sales ==
+                                    old('filter', $filter) ? 'selected' : '' }}>
+                                    {{ strtoupper($item->masterpegawai->nama) }}</option>
+                                @endforeach
+                            </select>
+                            <div class="input-group-append ml-2">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -69,11 +95,8 @@
                         <th class="px-6 py-6">Nama Toko</th>
                         <th class="px-6 py-6">Pemilik</th>
                         <th class="px-6 py-6">Alamat</th>
-                        <th class="px-6 py-6">Domisili</th>
                         <th class="px-6 py-6">No Telepon</th>
-                        <th class="px-6 py-6">Foto KTP</th>
-                        <th class="px-6 py-6">Status</th>
-                        <th class="px-6 py-6">Action</th>
+                        {{-- <th class="px-6 py-6">Action</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -91,49 +114,7 @@
                         <td class="px-6 py-6">{{ $item->namatoko }}</td>
                         <td class="px-6 py-6">{{ $item->pemiliktoko }}</td>
                         <td class="px-6 py-6">{{ $item->alamat }}</td>
-                        <td class="px-6 py-6">{{ $item->domisili }}</td>
                         <td class="px-6 py-6">{{ $item->no_telp }}</td>
-                        <td>
-                            <img src="{{ asset('fotoktp/'.$item->fotoktp) }}" alt="" style="width: 80px;">
-                        </td>
-
-                        <td class="px-6 py-2">
-                            @if ($item->status == 0)
-                            @if (Auth::user()->hakakses('supervisor'))
-                            <form action="{{ route('validasisales', $item->id) }}" method="POST">
-                                @csrf
-                                @method('patch')
-                                <select name="validasi" class="form-control" aria-label="Default select example">
-                                    <option value="" selected>Keterangan :</option>
-                                    <option value="Approve">Approve</option>
-                                    <option value="Ditolak">Ditolak</option>
-                                </select>
-                                <button type="submit" class="btn btn-info mt-1">OK</button>
-                            </form>
-                            @else
-                            <span class="badge badge-warning">Tunggu Verifikasi</span>
-                            @endif
-                            @else
-                            <div class="text-center">
-                                <span
-                                    class="{{ $item->status == 'Approve' ? 'badge badge-success' : 'badge badge-danger' }}">
-                                    {{ $item->status }}
-                                </span>
-                            </div>
-                            @endif
-                        </td>
-
-                        <td>
-                            <a href="{{ route('pendafoutlite.edit', $item->id)}}" class="btn btn-primary">
-                                Edit
-                            </a>
-                            <form action="{{ route('pendafoutlite.destroy', $item->id) }}" method="POST"
-                                style="display:inline;">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger">Hapus</button>
-                            </form>
-                        </td>
                     </tr>
                     @endforeach
                 </tbody>

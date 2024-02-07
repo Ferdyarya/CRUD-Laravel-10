@@ -12,7 +12,7 @@ class BrgmasukController extends Controller
     public function index(Request $request)
     {
         if($request->has('search')){
-            $brgmasuk = Brgmasuk::where('name', 'LIKE', '%' .$request->search.'%')->paginate(10);
+            $brgmasuk = Brgmasuk::where('namabarang', 'LIKE', '%' .$request->search.'%')->paginate(10);
         }else{
             $brgmasuk = Brgmasuk::paginate(10);
         }

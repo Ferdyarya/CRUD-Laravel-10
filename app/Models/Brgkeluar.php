@@ -12,7 +12,7 @@ class Brgkeluar extends Model
         'expired_at' => 'tanggal'
     ];
     protected $fillable = [
-        'kodebarang','namabarang', 'tokopemesan', 'qty', 'tanggal','alamat', 'id_pegawai'
+        'kodebarang','namabarang', 'qty', 'tanggal','alamat', 'id_pegawai','id_toko'
     ];
 
 
@@ -21,5 +21,10 @@ class Brgkeluar extends Model
     public function masterpegawai()
     {
         return $this->hasOne(Masterpegawai::class, 'id', 'id_pegawai');
+    }
+
+    public function mastertoko()
+    {
+        return $this->hasOne(Mastertoko::class, 'id', 'id_toko');
     }
 }

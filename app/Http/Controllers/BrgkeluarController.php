@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brgkeluar;
 use App\Models\Masterpegawai;
+use App\Models\Mastertoko;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -11,14 +12,14 @@ class BrgkeluarController extends Controller
 {
     public function index(Request $request)
     {
-        if($request->has('search')){
-            $brgkeluar = Brgkeluar::where('name', 'LIKE', '%' .$request->search.'%')->paginate(10);
-        }else{
-            $brgkeluar = Brgkeluar::paginate(10);
+        if ($request->has('search')) {
+            $brgkeluar = Brgkeluar::join('masterpegawais', 'masterpegawais.id', '=', 'brgkeluars.id_pegawai')
+                ->where('masterpegawais.nama', 'LIKE', '%' . $request->search . '%')
+                ->paginate(10);
+        } else {
+            $brgkeluar = Brgkeluar::with('masterpegawai')->paginate(10);
         }
-        return view('brgkeluar.index',[
-            'brgkeluar' => $brgkeluar
-        ]);
+        return view('brgkeluar.index', ['brgkeluar' => $brgkeluar]);
     }
 
     /**
@@ -29,9 +30,11 @@ class BrgkeluarController extends Controller
     public function create()
     {
        $masterpegawai = Masterpegawai::all();
+       $mastertoko = Mastertoko::all();
 
         return view('brgkeluar.create', [
             'masterpegawai' => $masterpegawai,
+            'mastertoko' => $mastertoko,
         ]);
         return view('brgkeluar.create')->with('success', 'Data Telah ditambahkan');
     }
@@ -73,9 +76,11 @@ class BrgkeluarController extends Controller
     public function edit(Brgkeluar $brgkeluar)
     {
         $masterpegawai = Masterpegawai::all();
+        $mastertoko = Mastertoko::all();
         return view('Brgkeluar.edit', [
             'item' => $brgkeluar,
             'mastersupplier' => $masterpegawai,
+            'mastertoko' => $mastertoko,
         ]);
     }
 

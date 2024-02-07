@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Illuminate\Http\Request;
 use App\Models\Masterpegawai;
 use App\Models\Pendafoutlite;
-use PDF;
+use Illuminate\Support\Facades\DB;
 
 class PendafoutliteController extends Controller
 {
     public function index(Request $request)
     {
-        if($request->has('search')){
-            $pendafoutlite = Pendafoutlite::where('name', 'LIKE', '%' .$request->search.'%')->paginate(10);
-        }else{
-            $pendafoutlite = Pendafoutlite::paginate(10);
+        if ($request->has('search')) {
+            $pendafoutlite = Pendafoutlite::join('masterpegawais', 'masterpegawais.id', '=', 'pendafoutlites.id_sales')
+                ->where('masterpegawais.nama', 'LIKE', '%' . $request->search . '%')
+                ->paginate(10);
+        } else {
+            $pendafoutlite = Pendafoutlite::with('masterpegawai')->paginate(10);
         }
-        return view('pendafoutlite.index',[
-            'pendafoutlite' => $pendafoutlite
-        ]);
+        return view('pendafoutlite.index', ['pendafoutlite' => $pendafoutlite]);
     }
 
     /**
@@ -120,6 +121,13 @@ class PendafoutliteController extends Controller
         return $pdf->download('laporan_pendafoutlite.pdf');
     }
 
+    public function Pernamapdf() {
+        $data = Pendafoutlite::all();
+
+        $pdf = PDF::loadview('laporansales/pernamapdf', ['pendafoutlite' => $data]);
+        return $pdf->download('laporan_pernama.pdf');
+    }
+
     public function validasi(Request $request, $id)
     {
         $pendafoutlite = Pendafoutlite::find($id);
@@ -132,4 +140,53 @@ class PendafoutliteController extends Controller
         }
         return redirect()->route('pendafoutlite.index')->with('success', 'Data Telah diupdate');
     }
+
+
+    public function pernama(Request $request)
+    {
+        $f = $request->filter ?? null;
+
+        // $data['title'] = "Laporan Penjualan Persales";
+
+        if ($f == '' || $f == 'all') {
+            $pendafoutlite['pendafoutlite'] = Pendafoutlite::paginate(10);
+        } else {
+            $pendafoutlite['pendafoutlite'] = Pendafoutlite::where('id_sales', $f)->paginate(10);
+        }
+
+        $pendafoutlite['id_sales'] = Pendafoutlite::groupBy('id_sales')
+            ->orderBy('id_sales')
+            ->select(DB::raw('count(*) as count, id_sales'))
+            ->get();
+
+         $pendafoutlite['filter'] = $f;
+
+        return view('laporansales.pernama', $pendafoutlite);
+    }
+
+    public function pernama_pdf($filter)
+    {
+        $f = $filter ?? null;
+
+        if ($f == '' || $f == 'all') {
+            $pendafoutlite['pendafoutlite'] = Pendafoutlite::all();
+        } else {
+            $pendafoutlite['pendafoutlite'] = Pendafoutlite::where('id_sales', $f)->get();
+        }
+
+        $pendafoutlite['id_sales'] = Pendafoutlite::groupBy('id_sales')
+            ->orderBy('id_sales')
+            ->select(DB::raw('count(*) as count, id_sales'))
+            ->get();
+
+        $pendafoutlite['filter'] = $f;
+
+
+        // $pdf = PDF::loadview('laporansales/pernamapdf', $pendafoutlite );
+        $pdf = PDF::loadview('laporansales/pernamapdf', ['pendafoutlite' => $pendafoutlite]);
+        return $pdf->download('laporan_lapor.pdf');
+    }
+
+
+
 }

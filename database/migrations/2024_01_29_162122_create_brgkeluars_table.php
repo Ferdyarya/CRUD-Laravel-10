@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('brgkeluars', function (Blueprint $table) {
             $table->id();
             $table->string('id_pegawai');
+            $table->string('id_toko');
             $table->string('kodebarang');
             $table->string('namabarang');
-            $table->string('tokopemesan');
             $table->string('tanggal');
             $table->string('qty');
             $table->string('alamat');

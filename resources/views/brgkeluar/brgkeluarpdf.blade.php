@@ -110,7 +110,7 @@
                 <td class="border textmid">{{ $item->masterpegawai->nama }}</td>
                 <td class="border textmid">{{ $item->kodebarang }}</td>
                 <td class="border textmid">{{ $item->namabarang }}</td>
-                <td class="border textmid">{{ $item->tokopemesan }}</td>
+                <td class="border textmid">{{ $item->mastertoko->namatoko }}</td>
                 <td class="border textmid">{{ $item->qty }}</td>
                 <td class="border textmid">{{ $item->alamat }}</td>
                 {{-- <td class="border px-6 py-4">{{ $item->tanggal->format('d M Y') }}</td> --}}

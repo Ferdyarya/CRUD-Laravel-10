@@ -63,9 +63,9 @@
                         <th class="px-6 py-6">No</th>
                         <th class="px-6 py-6">Tanggal</th>
                         <th class="px-6 py-6">Kode Barang</th>
-                        <th class="px-6 py-6">Dari Supplier</th>
                         <th class="px-6 py-6">Nama barang</th>
                         <th class="px-6 py-6">Qty</th>
+                        <th class="px-6 py-6">Dari Supplier</th>
                         <th class="px-6 py-6">Action</th>
                     </tr>
                 </thead>
@@ -80,9 +80,9 @@
                             {{ \Carbon\Carbon::parse($item->tanggal)->format('d-M-Y') }}
                         </td>
                         <td class="px-6 py-6">{{ $item->kodebarang }}</td>
-                        <td class="px-6 py-6">{{ $item->mastersupplier->namapt }}</td>
                         <td class="px-6 py-6">{{ $item->namabarang }}</td>
                         <td class="px-6 py-6">{{ $item->qty }}</td>
+                        <td class="px-6 py-6">{{ $item->mastersupplier->namapt }}</td>
                         <td>
                             <a href="{{ route('brgmasuk.edit', $item->id)}}" class="btn btn-primary">
                                 Edit

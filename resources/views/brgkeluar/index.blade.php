@@ -84,7 +84,7 @@
                         <td class="px-6 py-6">{{ $item->masterpegawai->nama }}</td>
                         <td class="px-6 py-6">{{ $item->kodebarang }}</td>
                         <td class="px-6 py-6">{{ $item->namabarang }}</td>
-                        <td class="px-6 py-6">{{ $item->tokopemesan }}</td>
+                        <td class="px-6 py-6">{{ $item->mastertoko->namatoko }}</td>
                         <td class="px-6 py-6">{{ $item->qty }}</td>
                         <td class="px-6 py-6">{{ $item->alamat }}</td>
                         <td>
