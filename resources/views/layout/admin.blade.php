@@ -291,7 +291,7 @@
                                     </a>
                                 </li>
                                 @endif
-                                @if (Auth::user()->hakakses('supervisor')|| Auth::user()->hakakses('sales'))
+                                @if (Auth::user()->hakakses('supervisor')|| Auth::user()->hakakses('sales')|| Auth::user()->hakakses('admin'))
                                 <li class="nav-item">
                                     <a href="{{ route('brgkeluar.index')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>

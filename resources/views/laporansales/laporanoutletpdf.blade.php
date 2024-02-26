@@ -78,7 +78,7 @@
     </div>
 
     <center>
-        <h5 class="mt-4">Rekap Laporan Sales Pemegang Toko</h5>
+        <h5 class="mt-4">Rekap Laporan Pendaftaran Outlet</h5>
     </center>
 
 

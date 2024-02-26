@@ -91,7 +91,7 @@ Route::get('laporanhariansales', [LaporanharianController::class, 'filterdatehar
 // Filter Laporan
 Route::get('pernamapdf/filter={filter}', [PendafoutliteController::class, 'pernama_pdf'])->name('pernamapdf');
 Route::get('laporanoutletpdf/filter={filter}', [PendafoutliteController::class, 'laporanoutletpdf'])->name('laporanoutletpdf');
-Route::get('laporanbrgmasukpdf/filter={filter}', [BrgkeluarController::class, 'laporanbrgmasukpdf'])->name('laporanbrgmasukpdf');
+Route::get('laporanbrgmasukpdf/filter={filter}', [BrgmasukController::class, 'laporanbrgmasukpdf'])->name('laporanbrgmasukpdf');
 Route::get('laporanorderanpdf/filter={filter}', [BrgkeluarController::class, 'laporanorderanpdf'])->name('laporanorderanpdf');
 Route::get('laporanhariansalespdf/filter={filter}', [LaporanharianController::class, 'laporanhariansalespdf'])->name('laporanhariansalespdf');
 
