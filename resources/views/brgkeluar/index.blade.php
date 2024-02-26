@@ -16,12 +16,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Barang Keluar</h1>
+                    <h1 class="m-0">Orderan</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Barang Keluar</li>
+                        <li class="breadcrumb-item active">Orderan</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -63,12 +63,12 @@
                         <th class="px-6 py-6">No</th>
                         <th class="px-6 py-6">Tanggal</th>
                         <th class="px-6 py-6">Sales</th>
-                        <th class="px-6 py-6">Kode Barang</th>
                         <th class="px-6 py-6">Nama Barang</th>
                         <th class="px-6 py-6">Toko Pemesan</th>
                         <th class="px-6 py-6">Qty</th>
                         <th class="px-6 py-6">Alamat Kirim</th>
                         <th class="px-6 py-6">Action</th>
+                        {{-- <th class="px-6 py-6">Kode Barang</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -77,13 +77,13 @@
                     @endphp
                     @foreach ($brgkeluar as $index => $item)
                     <tr>
-                        <th class="px-6 py-6">{{ $index + $brgkeluar->firstItem() }}</th>
+                        <td class="px-6 py-6">{{ $index + $brgkeluar->firstItem() }}</td>
                         <td class="px-6 py-6">
                             {{ \Carbon\Carbon::parse($item->tanggal)->format('d-M-Y') }}
                         </td>
                         <td class="px-6 py-6">{{ $item->masterpegawai->nama }}</td>
-                        <td class="px-6 py-6">{{ $item->kodebarang }}</td>
-                        <td class="px-6 py-6">{{ $item->namabarang }}</td>
+                        {{-- <td class="px-6 py-6">{{ $item->masterbarang->kodebarang }}</td> --}}
+                        <td class="px-6 py-6">{{ $item->masterbarang->namabarang }}</td>
                         <td class="px-6 py-6">{{ $item->mastertoko->namatoko }}</td>
                         <td class="px-6 py-6">{{ $item->qty }}</td>
                         <td class="px-6 py-6">{{ $item->alamat }}</td>

@@ -63,12 +63,12 @@
                                     class="form-control" id="exampleInputPassword1" placeholder="Masukan Call Hari ini"
                                     required>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="exampleInputPassword1">EC</label>
                                 <input value="{{ $item->ec }}" type="number" name="ec"
                                     class="form-control" id="exampleInputPassword1" placeholder="Masukan EC Hari Ini"
                                     required>
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Akumulasi EC</label>
                                 <input value="{{ $item->akumulasiec }}" type="number" name="akumulasiec"
@@ -82,7 +82,7 @@
                                     required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Aktual Harian</label>
+                                <label for="exampleInputPassword1">Akumulasi Penjualan</label>
                                 <input value="{{ $item->aktualharian }}" type="number" name="aktualharian"
                                     class="form-control" id="exampleInputPassword1" placeholder="Masukan Aktual Harian"
                                     required>

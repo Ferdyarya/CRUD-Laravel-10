@@ -113,4 +113,49 @@ class LaporanharianController extends Controller
         $pdf = PDF::loadview('laporanharian/laporanharianpdf', ['laporanharian' => $data]);
         return $pdf->download('laporan_laporanharian.pdf');
     }
+
+    // Laporan Harian Filter
+    public function cetakhariansalespertanggal()
+    {
+        $laporanharian = Laporanharian::Paginate(10);
+
+        return view('laporansales.laporanhariansales', ['laporanbrgmasuk' => $laporanharian]);
+    }
+
+    public function filterdatehariansales(Request $request)
+    {
+        $startDate = $request->input('dari');
+        $endDate = $request->input('sampai');
+
+         if ($startDate == '' && $endDate == '') {
+            $laporanhariansales = Laporanharian::paginate(10);
+        } else {
+            $laporanhariansales = Laporanharian::whereDate('tanggal','>=',$startDate)
+                                        ->whereDate('tanggal','<=',$endDate)
+                                        ->paginate(10);
+        }
+        session(['filter_start_date' => $startDate]);
+        session(['filter_end_date' => $endDate]);
+
+        return view('laporansales.laporanhariansales', compact('laporanhariansales'));
+    }
+
+
+    public function laporanhariansalespdf(Request $request )
+    {
+        $startDate = session('filter_start_date');
+        $endDate = session('filter_end_date');
+
+        if ($startDate == '' && $endDate == '') {
+            $laporanhariansales = Laporanharian::all();
+        } else {
+            $laporanhariansales = Laporanharian::whereDate('tanggal', '>=', $startDate)
+                                            ->whereDate('tanggal', '<=', $endDate)
+                                            ->get();
+        }
+
+        // Render view dengan menyertakan data laporan dan informasi filter
+        $pdf = PDF::loadview('laporansales.laporanhariansalespdf', compact('laporanhariansales'));
+        return $pdf->download('laporan_laporanhariansales.pdf');
+    }
 }

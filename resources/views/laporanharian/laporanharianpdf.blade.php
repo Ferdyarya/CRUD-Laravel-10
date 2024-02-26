@@ -94,10 +94,10 @@
                 <th>Area</th>
                 <th>Chanel</th>
                 <th>Call</th>
-                <th>EC</th>
+                {{-- <th>EC</th> --}}
                 <th>Akumulasi EC</th>
                 <th>Target Harian</th>
-                <th>Aktual Harian</th>
+                <th>Akumulasi Penjualan</th>
             </tr>
         </thead>
         <tbody>
@@ -113,7 +113,7 @@
                 <td class="border textmid">{{ $item->area }}</td>
                 <td class="border textmid">{{ $item->chanel }}</td>
                 <td class="border textmid">{{ $item->call }}</td>
-                <td class="border textmid">{{ $item->ec }}</td>
+                {{-- <td class="border textmid">{{ $item->ec }}</td> --}}
                 <td class="border textmid">{{ $item->akumulasiec }}</td>
                 <td class="border textmid">Rp. {{ number_format($item->targetharian) }}</td>
                 <td class="border textmid">Rp. {{ number_format($item->aktualharian) }}</td>

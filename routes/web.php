@@ -52,8 +52,8 @@ Route::prefix('dashboard')->middleware(['auth:sanctum'])->group(function() {
 
 
 
-// cetak PDF
-// Master Data
+
+// Master Data Report
 Route::get('masterpegawaipdf', [MasterpegawaiController::class, 'masterpegawaipdf'])->name('masterpegawaipdf');
 Route::get('mastertokopdf', [MasterpegawaiController::class, 'mastertokopdf'])->name('mastertokopdf');
 Route::get('mastersupplierpdf', [MastersupplierController::class, 'mastersupplierpdf'])->name('mastersupplierpdf');
@@ -62,7 +62,7 @@ Route::get('laporanharianpdf', [LaporanharianController::class, 'laporanharianpd
 
 
 
-// Data Tables
+// Data Tables Report Report
 Route::get('pendafoutlitepdf', [PendafoutliteController::class, 'pendafoutlitepdf'])->name('pendafoutlitepdf');
 Route::get('brgmasukpdf', [BrgmasukController::class, 'brgmasukpdf'])->name('brgmasukpdf');
 Route::get('brgkeluarpdf', [BrgkeluarController::class, 'brgkeluarpdf'])->name('brgkeluarpdf');
@@ -70,16 +70,31 @@ Route::get('laporanharianpdf', [LaporanharianController::class, 'laporanharianpd
 // Route::get('pernamapdf', [LaporanharianController::class, 'pernamapdf'])->name('pernamapdf');
 
 
-
 // Validasi
 Route::patch('sales/{id}/validasi', [PendafoutliteController::class, 'validasi'])->name('validasisales');
 
-// Recap
+// Recap Laporan Tampilan
 Route::get('laporansales/pernama', [PendafoutliteController::class, 'pernama'])->name('pernama');
+Route::get('laporansales/laporanoutlet', [PendafoutliteController::class, 'cetakpegawaipertanggal'])->name('laporanoutlet');
+Route::get('laporansales/laporanbrgmasuk', [BrgmasukController::class, 'cetakbarangpertanggal'])->name('laporanbrgmasuk');
+Route::get('laporansales/laporanorderan', [BrgkeluarController::class, 'cetakbrgkeluarpertanggal'])->name('laporanorderan');
+Route::get('laporansales/laporanhariansales', [LaporanharianController::class, 'cetakhariansalespertanggal'])->name('laporanhariansales');
+
+// Filtering
+Route::get('laporanoutlet', [PendafoutliteController::class, 'filterdate'])->name('laporanoutlet');
+Route::get('laporanbrgmasuk', [BrgmasukController::class, 'filterdatebarang'])->name('laporanbrgmasuk');
+Route::get('laporanorderan', [BrgkeluarController::class, 'filterdatebrgkeluar'])->name('laporanorderan');
+Route::get('laporanhariansales', [LaporanharianController::class, 'filterdatehariansales'])->name('laporanhariansales');
 
 
-// Filter
+
+// Filter Laporan
 Route::get('pernamapdf/filter={filter}', [PendafoutliteController::class, 'pernama_pdf'])->name('pernamapdf');
+Route::get('laporanoutletpdf/filter={filter}', [PendafoutliteController::class, 'laporanoutletpdf'])->name('laporanoutletpdf');
+Route::get('laporanbrgmasukpdf/filter={filter}', [BrgkeluarController::class, 'laporanbrgmasukpdf'])->name('laporanbrgmasukpdf');
+Route::get('laporanorderanpdf/filter={filter}', [BrgkeluarController::class, 'laporanorderanpdf'])->name('laporanorderanpdf');
+Route::get('laporanhariansalespdf/filter={filter}', [LaporanharianController::class, 'laporanhariansalespdf'])->name('laporanhariansalespdf');
+
 
 });
 

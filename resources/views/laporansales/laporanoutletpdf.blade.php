@@ -78,7 +78,7 @@
     </div>
 
     <center>
-        <h5 class="mt-4">Laporan Orderan</h5>
+        <h5 class="mt-4">Rekap Laporan Sales Pemegang Toko</h5>
     </center>
 
 
@@ -91,11 +91,13 @@
                 <th>No</th>
                 <th>Tanggal</th>
                 <th>Sales</th>
-                {{-- <th>Kode Barang</th> --}}
-                <th>Nama Barang</th>
-                <th>Toko Pemesan</th>
-                <th>Qty</th>
-                <th>Alamat Kirim</th>
+                <th>Kode Toko</th>
+                <th>Nama Toko</th>
+                <th>Pemilik</th>
+                <th>Alamat</th>
+                <th>No Telepon</th>
+                <th>status</th>
+                {{-- <th>Tanggal</th> --}}
             </tr>
         </thead>
         <tbody>
@@ -103,16 +105,17 @@
             $grandTotal = 0;
             @endphp --}}
 
-            @foreach ($brgkeluar as $item )
+            @foreach ($laporanoutlet as $item )
             <tr>
                 <td class="border">{{ $loop->iteration }}</td>
                 <td class="border textmid">{{ \Carbon\Carbon::parse($item->tanggal)->format('d-M-Y') }}</td>
                 <td class="border textmid">{{ $item->masterpegawai->nama }}</td>
-                {{-- <td class="border textmid">{{ $item->kodebarang }}</td> --}}
-                <td class="border textmid">{{ $item->masterbarang->namabarang }}</td>
-                <td class="border textmid">{{ $item->mastertoko->namatoko }}</td>
-                <td class="border textmid">{{ $item->qty }}</td>
+                <td class="border textmid">{{ $item->kodetoko }}</td>
+                <td class="border textmid">{{ $item->namatoko }}</td>
+                <td class="border textmid">{{ $item->pemiliktoko }}</td>
                 <td class="border textmid">{{ $item->alamat }}</td>
+                <td class="border textmid">{{ $item->no_telp }}</td>
+                <td class="border textmid">{{ $item->status }}</td>
                 {{-- <td class="border px-6 py-4">{{ $item->tanggal->format('d M Y') }}</td> --}}
             </tr>
             @endforeach

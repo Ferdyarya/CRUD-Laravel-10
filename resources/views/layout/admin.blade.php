@@ -226,6 +226,7 @@
 
 
                         {{-- Master Data --}}
+                        @if (Auth::user()->hakakses('supervisor'))
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
@@ -261,6 +262,7 @@
                                 </li>
                             </ul>
                         </li>
+                        @endif
 
 
                         {{-- Data Tables --}}
@@ -273,30 +275,38 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                @if (Auth::user()->hakakses('supervisor')|| Auth::user()->hakakses('sales'))
                                 <li class="nav-item">
                                     <a href="{{ route('pendafoutlite.index')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Pendaftaran Outlite</p>
                                     </a>
                                 </li>
+                                 @endif
+                                @if (Auth::user()->hakakses('supervisor')|| Auth::user()->hakakses('admin'))
                                 <li class="nav-item">
                                     <a href="{{ route('brgmasuk.index')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Barang Masuk</p>
                                     </a>
                                 </li>
+                                @endif
+                                @if (Auth::user()->hakakses('supervisor')|| Auth::user()->hakakses('sales'))
                                 <li class="nav-item">
                                     <a href="{{ route('brgkeluar.index')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Barang Keluar</p>
+                                        <p>Orderan</p>
                                     </a>
                                 </li>
+                                @endif
+                                @if (Auth::user()->hakakses('supervisor')|| Auth::user()->hakakses('sales'))
                                 <li class="nav-item">
                                     <a href="{{ route('laporanharian.index')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>penginputan laporan harian</p>
+                                        <p>Laporan harian</p>
                                     </a>
                                 </li>
+                                @endif
                             </ul>
                         </li>
 
@@ -305,17 +315,49 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
-                                    Report Recapan Sales
+                                    Report
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                @if (Auth::user()->hakakses('supervisor')|| Auth::user()->hakakses('admin'))
                                 <li class="nav-item">
                                     <a href="{{ route('pernama')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Sales Pemegang Toko</p>
                                     </a>
                                 </li>
+                                @endif
+                                @if (Auth::user()->hakakses('supervisor')|| Auth::user()->hakakses('admin')|| Auth::user()->hakakses('sales'))
+                                <li class="nav-item">
+                                    <a href="{{ route('laporanoutlet')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Pendaftaran Outlet</p>
+                                    </a>
+                                </li>
+                                @endif
+                                @if (Auth::user()->hakakses('supervisor')|| Auth::user()->hakakses('admin'))
+                                <li class="nav-item">
+                                    <a href="{{ route('laporanbrgmasuk')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Barang Masuk</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('laporanorderan')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Orderan</p>
+                                    </a>
+                                </li>
+                                @endif
+                                @if (Auth::user()->hakakses('supervisor')|| Auth::user()->hakakses('admin')|| Auth::user()->hakakses('sales'))
+                                <li class="nav-item">
+                                    <a href="{{ route('laporanhariansales')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Laporan Harian</p>
+                                    </a>
+                                </li>
+                                @endif
                             </ul>
                         </li>
 

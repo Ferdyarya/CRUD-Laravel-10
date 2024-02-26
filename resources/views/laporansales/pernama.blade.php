@@ -47,13 +47,6 @@
 
             {{-- Button Export PDF --}}
             <div class="col-auto row">
-                {{-- <a href="{{ route('pendafoutlite.create')}}" class="btn btn-success">
-                    Tambah Data
-                </a> --}}
-                {{-- <a href="{{ route('pendafoutlitepdf')}}" class="btn btn-danger">
-                    Export PDF
-                </a> --}}
-
                 @if (!empty($filter))
                 <a href="{{ route('pernamapdf', $filter) }}" class="btn btn-danger">Export PDF</a>
                 @else
@@ -103,9 +96,9 @@
                     @php
                     $no=1;
                     @endphp
-                    @foreach ($pendafoutlite as $index => $item)
+                    @foreach ($pendafoutlite as $item)
                     <tr>
-                        <th class="px-6 py-6">{{ $index + $pendafoutlite->firstItem() }}</th>
+                        <th class="px-6 py-6">{{ $loop->iteration }}</th>
                         <td class="px-6 py-6">
                             {{ \Carbon\Carbon::parse($item->tanggal)->format('d-M-Y') }}
                         </td>

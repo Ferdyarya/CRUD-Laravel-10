@@ -36,20 +36,22 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="exampleInputPassword1">Kode Barang</label>
                                 <input value="{{ $item->kodebarang }}" type="text" name="kodebarang"
                                     class="form-control" id="exampleInputPassword1" placeholder="Masukan Kode Barang"
                                     required>
+                            </div> --}}
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Barang</label>
+                                <select name="id_barang" class="form-control">
+                                    @foreach ($masterbarang as $item)
+                                    <option value="{{ $item->id }}">{{ $item->namabarang }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Nama Barang</label>
-                                <input value="{{ $item->namabarang }}" type="text" name="namabarang"
-                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Nama Barang"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Sales Yang Proses</label>
+                                <label for="exampleInputPassword1">Nama Toko</label>
                                 <select name="id_toko" class="form-control">
                                     @foreach ($mastertoko as $item)
                                     <option value="{{ $item->id }}">{{ $item->namatoko }}</option>

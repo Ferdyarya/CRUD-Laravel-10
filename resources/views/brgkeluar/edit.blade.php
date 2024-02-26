@@ -11,11 +11,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 
-<title>Barang Keluar</title>
+<title>Orderan</title>
 
 
 <body>
-    <h1 class="text-center mb-4">Edit Barang Keluar</h1>
+    <h1 class="text-center mb-4">Edit Orderan</h1>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-8">
@@ -37,17 +37,19 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="exampleInputPassword1">Kode Barang</label>
                                 <input value="{{ $item->kodebarang }}" type="text" name="kodebarang"
                                     class="form-control" id="exampleInputPassword1" placeholder="Masukan Kode Barang"
                                     required>
-                            </div>
+                            </div> --}}
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Nama Barang</label>
-                                <input value="{{ $item->namabarang }}" type="text" name="namabarang"
-                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Nama Barang"
-                                    required>
+                                <label for="exampleInputPassword1">Supplier</label>
+                                <select name="id_barang" class="form-control">
+                                    @foreach ($masterbarang as $barang)
+                                    <option value="{{ $barang->id }}">{{ $barang->namabarang }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Supplier</label>

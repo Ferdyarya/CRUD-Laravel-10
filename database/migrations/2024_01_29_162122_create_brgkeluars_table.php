@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('id_pegawai');
             $table->string('id_toko');
-            $table->string('kodebarang');
-            $table->string('namabarang');
+            // $table->string('kodebarang');
+            $table->string('id_barang');
             $table->string('tanggal');
             $table->string('qty');
             $table->string('alamat');

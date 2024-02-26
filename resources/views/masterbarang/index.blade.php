@@ -50,9 +50,9 @@
                 <a href="{{ route('masterbarang.create')}}" class="btn btn-success">
                     Tambah Data
                 </a>
-                <a href="{{ route('masterbarangpdf')}}" class="btn btn-danger">
+                {{-- <a href="{{ route('masterbarangpdf')}}" class="btn btn-danger">
                     Export PDF
-                </a>
+                </a> --}}
             </div>
         </div>
 
@@ -61,7 +61,7 @@
                 <thead>
                     <tr>
                         <th class="px-6 py-2">No</th>
-                        <th class="px-6 py-2">Kode Produk</th>
+                        {{-- <th class="px-6 py-2">Kode Produk</th> --}}
                         <th class="px-6 py-2">Nama Produk</th>
                         <th class="px-6 py-2">Harga</th>
                         <th class="px-6 py-2">Action</th>
@@ -74,7 +74,7 @@
                     @foreach ($masterbarang as $index => $item)
                     <tr>
                         <th class="px-6 py-2">{{ $index + $masterbarang->firstItem() }}</th>
-                        <td class="px-6 py-2">{{ $item->kodebarang }}</td>
+                        {{-- <td class="px-6 py-2">{{ $item->kodebarang }}</td> --}}
                         <td class="px-6 py-2">{{ $item->namabarang }}</td>
                         <td class="px-6 py-2">Rp. {{ number_format($item->hargabarang )}}</td>
                         <td>

@@ -50,9 +50,9 @@
                 <a href="{{ route('mastersupplier.create')}}" class="btn btn-success">
                     Tambah Data
                 </a>
-                <a href="{{ route('mastersupplierpdf')}}" class="btn btn-danger">
+                {{-- <a href="{{ route('mastersupplierpdf')}}" class="btn btn-danger">
                     Export PDF
-                </a>
+                </a> --}}
             </div>
         </div>
 

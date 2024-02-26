@@ -11,11 +11,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 
-<title>Master Data Sales</title>
+<title>Master Data Barang</title>
 
 
 <body>
-    <h1 class="text-center mb-4">Edit Master Data Bahan Baku</h1>
+    <h1 class="text-center mb-4">Edit Master Data Barang</h1>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-8">
@@ -24,12 +24,12 @@
                         <form method="POST" action="{{ route('masterbarang.update', $item->id) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="exampleInputEmail1">Kode Produk</label>
                                 <input value="{{ $item->kodebarang }}" type="text" name="kodebarang" class="form-control"
                                     id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan Kode Toko"
                                     required>
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Nama Produk</label>
                                 <input value="{{ $item->namabarang }}" type="text" name="namabarang" class="form-control"

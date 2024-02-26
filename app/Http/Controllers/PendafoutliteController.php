@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Masterpegawai;
 use App\Models\Pendafoutlite;
@@ -114,19 +115,19 @@ class PendafoutliteController extends Controller
         return redirect()->route('pendafoutlite.index')->with('success', 'Data Telah dihapus');
     }
 
-    public function Pendafoutlitepdf() {
-        $data = Pendafoutlite::all();
+    // public function Pendafoutlitepdf() {
+    //     $data = Pendafoutlite::all();
 
-        $pdf = PDF::loadview('pendafoutlite/pendafoutlitepdf', ['pendafoutlite' => $data]);
-        return $pdf->download('laporan_pendafoutlite.pdf');
-    }
+    //     $pdf = PDF::loadview('pendafoutlite/pendafoutlitepdf', ['pendafoutlite' => $data]);
+    //     return $pdf->download('laporan_pendafoutlite.pdf');
+    // }
 
-    public function Pernamapdf() {
-        $data = Pendafoutlite::all();
+    // public function Pernamapdf() {
+    //     $data = Pendafoutlite::all();
 
-        $pdf = PDF::loadview('laporansales/pernamapdf', ['pendafoutlite' => $data]);
-        return $pdf->download('laporan_pernama.pdf');
-    }
+    //     $pdf = PDF::loadview('laporansales/pernamapdf', ['pendafoutlite' => $data]);
+    //     return $pdf->download('laporan_pernama.pdf');
+    // }
 
     public function validasi(Request $request, $id)
     {
@@ -184,8 +185,102 @@ class PendafoutliteController extends Controller
 
         // $pdf = PDF::loadview('laporansales/pernamapdf', $pendafoutlite );
         $pdf = PDF::loadview('laporansales/pernamapdf', ['pendafoutlite' => $pendafoutlite]);
-        return $pdf->download('laporan_lapor.pdf');
+        return $pdf->download('laporan_pemegangtoko.pdf');
     }
+
+
+    // public function laporanoutlet(Request $request)
+    // {
+    //     // $data['title'] = "Laporan Penjualan Persales";
+    //     $f = $request->filter ?? null;
+
+    //     if ($f == '' || $f == 'all') {
+    //         $pendafoutlite['pendafoutlite'] = Pendafoutlite::paginate(10);
+    //     } else {
+    //         $pendafoutlite['pendafoutlite'] = Pendafoutlite::where('id_sales', $f)->paginate(10);
+    //     }
+
+    //     $pendafoutlite['id_sales'] = Pendafoutlite::groupBy('id_sales')
+    //         ->orderBy('id_sales')
+    //         ->select(DB::raw('count(*) as count, id_sales'))
+    //         ->get();
+
+    //      $pendafoutlite['filter'] = $f;
+
+    //     return view('laporansales.laporanoutlet', $pendafoutlite);
+    // }
+
+    // public function laporanoutletpdf($filter)
+    // {
+    //     $f = $filter ?? null;
+
+    //     if ($f == '' || $f == 'all') {
+    //         $pendafoutlite['pendafoutlite'] = Pendafoutlite::all();
+    //     } else {
+    //         $pendafoutlite['pendafoutlite'] = Pendafoutlite::where('id_sales', $f)->get();
+    //     }
+
+    //     $pendafoutlite['id_sales'] = Pendafoutlite::groupBy('id_sales')
+    //         ->orderBy('id_sales')
+    //         ->select(DB::raw('count(*) as count, id_sales'))
+    //         ->get();
+
+    //     $pendafoutlite['filter'] = $f;
+
+
+        // $pdf = PDF::loadview('laporansales/pernamapdf', $pendafoutlite );
+    //     $pdf = PDF::loadview('laporansales/laporanoutletpdf', ['pendafoutlite' => $pendafoutlite]);
+    //     return $pdf->download('laporan_laporanoutlet.pdf');
+    // }
+
+    public function cetakpegawaipertanggal()
+    {
+        $pendafoutlite = Pendafoutlite::Paginate(10);
+
+        return view('laporansales.laporanoutlet', ['pendafoutlite' => $pendafoutlite]);
+    }
+
+    public function filterdate(Request $request)
+    {
+        $startDate = $request->input('dari');
+        $endDate = $request->input('sampai');
+
+         if ($startDate == '' && $endDate == '') {
+            $laporanoutlet = Pendafoutlite::paginate(10);
+        } else {
+            $laporanoutlet = Pendafoutlite::whereDate('tanggal','>=',$startDate)
+                                        ->whereDate('tanggal','<=',$endDate)
+                                        ->paginate(10);
+        }
+        session(['filter_start_date' => $startDate]);
+        session(['filter_end_date' => $endDate]);
+
+        return view('laporansales.laporanoutlet', compact('laporanoutlet'));
+    }
+
+
+    public function laporanoutletpdf(Request $request )
+    {
+        $startDate = session('filter_start_date');
+        $endDate = session('filter_end_date');
+
+        if ($startDate == '' && $endDate == '') {
+            $laporanoutlet = Pendafoutlite::all();
+        } else {
+            $laporanoutlet = Pendafoutlite::whereDate('tanggal', '>=', $startDate)
+                                            ->whereDate('tanggal', '<=', $endDate)
+                                            ->get();
+        }
+
+
+
+        // Render view dengan menyertakan data laporan dan informasi filter
+        $pdf = PDF::loadview('laporansales.laporanoutletpdf', compact('laporanoutlet'));
+        return $pdf->download('laporan_laporanoutlet.pdf');
+    }
+
+
+
 
 
 

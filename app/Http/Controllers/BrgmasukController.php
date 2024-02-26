@@ -43,9 +43,9 @@ class BrgmasukController extends Controller
      */
     public function store(Request $request)
     {
-        $brgmasuk = $request->all();
+        $data = $request->all();
 
-        $brgmasuk = Brgmasuk::create($request->all());
+        $data = Brgmasuk::create($request->all());
 
         return redirect()->route('brgmasuk.index')->with('success', 'Data Telah ditambahkan');
     }
@@ -112,5 +112,51 @@ class BrgmasukController extends Controller
 
         $pdf = PDF::loadview('brgmasuk/brgmasukpdf', ['brgmasuk' => $data]);
         return $pdf->download('laporan_Barang_masuk.pdf');
+    }
+
+
+    // Laporan Barang Filter
+    public function cetakbarangpertanggal()
+    {
+        $brgmasuk = Brgmasuk::Paginate(10);
+
+        return view('laporansales.laporanbrgmasuk', ['laporanbrgmasuk' => $brgmasuk]);
+    }
+
+    public function filterdatebarang(Request $request)
+    {
+        $startDate = $request->input('dari');
+        $endDate = $request->input('sampai');
+
+         if ($startDate == '' && $endDate == '') {
+            $laporanbrgmasuk = Brgmasuk::paginate(10);
+        } else {
+            $laporanbrgmasuk = Brgmasuk::whereDate('tanggal','>=',$startDate)
+                                        ->whereDate('tanggal','<=',$endDate)
+                                        ->paginate(10);
+        }
+        session(['filter_start_date' => $startDate]);
+        session(['filter_end_date' => $endDate]);
+
+        return view('laporansales.laporanbrgmasuk', compact('laporanbrgmasuk'));
+    }
+
+
+    public function laporanbrgmasukpdf(Request $request )
+    {
+        $startDate = session('filter_start_date');
+        $endDate = session('filter_end_date');
+
+        if ($startDate == '' && $endDate == '') {
+            $laporanbrgmasuk = Brgmasuk::all();
+        } else {
+            $laporanbrgmasuk = Brgmasuk::whereDate('tanggal', '>=', $startDate)
+                                            ->whereDate('tanggal', '<=', $endDate)
+                                            ->get();
+        }
+
+        // Render view dengan menyertakan data laporan dan informasi filter
+        $pdf = PDF::loadview('laporansales.laporanbrgmasukpdf', compact('laporanbrgmasuk'));
+        return $pdf->download('laporan_laporanbrgmasuk.pdf');
     }
 }

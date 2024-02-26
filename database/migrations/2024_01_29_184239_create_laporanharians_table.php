@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('area');
             $table->string('chanel');
             $table->string('call');
-            $table->string('ec');
+            // $table->string('ec');
             $table->string('akumulasiec');
             $table->string('targetharian');
             $table->string('aktualharian');

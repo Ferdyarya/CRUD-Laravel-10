@@ -66,10 +66,10 @@
                         <th class="px-6 py-6">Area</th>
                         <th class="px-6 py-6">Chanel</th>
                         <th class="px-6 py-6">Call</th>
-                        <th class="px-6 py-6">EC</th>
                         <th class="px-6 py-6">Akumulasi EC</th>
                         <th class="px-6 py-6">Target Harian</th>
-                        <th class="px-6 py-6">Aktual Harian</th>
+                        <th class="px-6 py-6">Akumulasi Penjualan</th>
+                        {{-- <th class="px-6 py-6">EC</th> --}}
                         <th class="px-6 py-6">Action</th>
                     </tr>
                 </thead>
@@ -87,10 +87,10 @@
                         <td class="px-6 py-6">{{ $item->area }}</td>
                         <td class="px-6 py-6">{{ $item->chanel }}</td>
                         <td class="px-6 py-6">{{ $item->call }}</td>
-                        <td class="px-6 py-6">{{ $item->ec }}</td>
                         <td class="px-6 py-6">{{ $item->akumulasiec }}</td>
                         <td class="px-6 py-6">Rp. {{ number_format($item->targetharian) }}</td>
                         <td class="px-6 py-6">Rp. {{ number_format($item->aktualharian) }}</td>
+                        {{-- <td class="px-6 py-6">{{ $item->ec }}</td> --}}
                         <td>
                             <a href="{{ route('laporanharian.edit', $item->id)}}" class="btn btn-primary">
                                 Edit

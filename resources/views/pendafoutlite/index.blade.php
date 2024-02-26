@@ -16,7 +16,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Pendaftaran Outlite</h1>
+                    <h1 class="m-0">Pendaftaran Outlet</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -50,9 +50,9 @@
                 <a href="{{ route('pendafoutlite.create')}}" class="btn btn-success">
                     Tambah Data
                 </a>
-                <a href="{{ route('pendafoutlitepdf')}}" class="btn btn-danger">
+                {{-- <a href="{{ route('pendafoutlitepdf')}}" class="btn btn-danger">
                     Export PDF
-                </a>
+                </a> --}}
             </div>
         </div>
 

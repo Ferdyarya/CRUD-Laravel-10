@@ -89,7 +89,7 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>Kode</th>
+                {{-- <th>Kode</th> --}}
                 <th>Nama Toko</th>
                 <th>Pemilik Toko</th>
                 <th>Alamat</th>
