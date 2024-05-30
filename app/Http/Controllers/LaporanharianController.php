@@ -46,7 +46,20 @@ class LaporanharianController extends Controller
     {
         $data = $request->all();
 
-        $data = Laporanharian::create($request->all());
+        $perulanganInput = count($data["id_pegawai"]);
+
+        for ($i = 0; $i < $perulanganInput; $i++) {
+            Laporanharian::create([
+                'id_pegawai' => $data["id_pegawai"][$i],
+                'tanggal' => $data["tanggal"][$i],
+                'area' => $data["area"][$i],
+                'chanel' => $data["chanel"][$i],
+                'call' => $data["call"][$i],
+                'akumulasiec' => $data["akumulasiec"][$i],
+                'targetharian' => $data["targetharian"][$i],
+                'aktualharian' => $data["aktualharian"][$i],
+            ]);
+        }
 
         return redirect()->route('laporanharian.index')->with('success', 'Data Telah ditambahkan');
     }

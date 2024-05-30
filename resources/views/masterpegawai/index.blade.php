@@ -16,12 +16,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Master Data Sales</h1>
+                    <h1 class="m-0">Master Data Pegawai</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Master Data Sales</li>
+                        <li class="breadcrumb-item active">Master Data Pegawai</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -46,14 +46,14 @@
             </div>
 
             {{-- Button Export PDF --}}
-            <div class="col-auto">
+            {{-- <div class="col-auto">
                 <a href="{{ route('masterpegawai.create')}}" class="btn btn-success">
                     Tambah Data
                 </a>
-                {{-- <a href="{{ route('masterpegawaipdf')}}" class="btn btn-danger">
+                <a href="{{ route('masterpegawaipdf')}}" class="btn btn-danger">
                     Export PDF
-                </a> --}}
-            </div>
+                </a>
+            </div> --}}
         </div>
 
         <div>

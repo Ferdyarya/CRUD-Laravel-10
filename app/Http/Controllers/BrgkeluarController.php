@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Brgkeluar;
 use App\Models\Masterbarang;
@@ -48,15 +49,25 @@ class BrgkeluarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,)
-    {
-        $data = $request->all();
+    public function store(Request $request)
+{
+    $data = $request->all();
 
-        Brgkeluar::create($data);
+    $perulanganInput = count($data["id_pegawai"]);
 
-        return redirect()->route('brgkeluar.index')->with('success', 'Data Telah ditambahkan');
-
+    for ($i = 0; $i < $perulanganInput; $i++) {
+        Brgkeluar::create([
+            'id_pegawai' => $data["id_pegawai"][$i],
+            'id_barang' => $data["id_barang"][$i],
+            'id_toko' => $data["id_toko"][$i],
+            'qty' => $data["qty"][$i],
+            'alamat' => $data["alamat"][$i],
+            'tanggal' => $data["tanggal"][$i],
+        ]);
     }
+
+    return redirect()->route('brgkeluar.index')->with('success', 'Data Telah ditambahkan');
+}
 
     /**
      * Display the specified resource.
@@ -170,4 +181,87 @@ class BrgkeluarController extends Controller
         $pdf = PDF::loadview('laporansales.laporanorderanpdf', compact('laporanorderan'));
         return $pdf->download('laporan_laporanorderan.pdf');
     }
+
+    // Invoice(id)
+    public function invoicepdfid($id)
+    {
+    $data['brgkeluar'] = Brgkeluar::where('id', $id)->get();
+
+
+    if ($data['brgkeluar']->isEmpty()) {
+        return redirect()->back()->with('error', 'Tidak ada data penjualan ditemukan untuk ID yang diberikan.');
+    }
+
+    $data['filter'] = $id;
+
+    // Generate the PDF(id)
+    $pdf = PDF::loadview('laporansales/invoicepdf', $data);
+    return $pdf->download('laporan-invoicepdf_perid.pdf');
+    }
+
+    // Nota Pembelian
+    public function suratjalanpdfid($id)
+    {
+    $data['brgkeluar'] = Brgkeluar::where('id', $id)->get();
+
+    // Periksa apakah data penjualan ditemukan untuk ID yang diberikan
+    if ($data['brgkeluar']->isEmpty()) {
+        return redirect()->back()->with('error', 'Tidak ada data penjualan ditemukan untuk ID yang diberikan.');
+    }
+
+    $data['filter'] = $id;
+
+    // Generate the PDF
+    $pdf = PDF::loadview('laporansales/suratjalanpdf', $data);
+    return $pdf->download('laporan-suratjalanpdf_perid.pdf');
+    }
+
+    // PDF
+    public function invoicepdf($filter)
+{
+    $f = $filter ?? null;
+
+    if ($f == '' || $f == 'all') {
+        $data['brgkeluar'] = Brgkeluar::all();
+    } else {
+        $data['brgkeluar'] = Brgkeluar::where('id_barang', $f)->get();
+    }
+
+    $data['id_barang'] = Brgkeluar::groupBy('id_barang')
+        ->orderBy('id_barang')
+        ->select(DB::raw('count(*) as count, id_barang'))
+        ->get();
+
+    $data['filter'] = $f;
+
+    $pdf = PDF::loadview('laporansales/invoicepdf', $data);
+    return $pdf->download('laporan-invoicepdf.pdf');
+}
+
+     // PDF
+    public function suratjalanpdf($filter)
+    {
+
+        $f = $filter ?? null;
+
+        $data['brgkeluar'] = Brgkeluar::all();
+        if($f == '' || $f == 'all')
+        {
+            $data['brgkeluar'] = Brgkeluar::all();
+        }
+        else
+        {
+            $data['brgkeluar'] = Brgkeluar::where('id_barang', $f)->get();
+        }
+        $data['id_barang'] = Brgkeluar::groupBy( 'id_barang' )
+                ->orderBy( 'id_barang' )
+                ->select(DB::raw('count(*) as count, id_barang'))
+                ->get();
+         $data['filter'] = $f;
+
+        // $customPaper = array(0,0,500,700);
+        $pdf = PDF::loadview('laporansales/suratjalanpdf', $data);
+    	return $pdf->download('laporan-suratjalanpdf.pdf');
+    }
+
 }

@@ -124,14 +124,14 @@
                         </td>
 
                         <td>
-                            <a href="{{ route('pendafoutlite.edit', $item->id)}}" class="btn btn-primary">
+                            <a href="{{ route('pendafoutlite.edit', $item->id)}}" class="btn btn-primary btn-block" style="display:inline;" >
                                 Edit
                             </a>
                             <form action="{{ route('pendafoutlite.destroy', $item->id) }}" method="POST"
                                 style="display:inline;">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                <button type="submit" class="btn btn-danger btn-block mt-3" >Hapus</button>
                             </form>
                         </td>
                     </tr>

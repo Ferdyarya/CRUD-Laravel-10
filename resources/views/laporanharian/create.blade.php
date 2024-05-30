@@ -21,65 +21,97 @@
                 <div class="card">
                     <div class="card-body">
                         <form method="POST" action="{{ route('laporanharian.store') }}" enctype="multipart/form-data">
-                            @csrf
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Pilih Tanggal</label>
-                                <input value="{{ old('tanggal') }}" type="date" name="tanggal"
-                                    class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                    placeholder="Pilih Tanggal">
+                            <div class="card-body">
+                                @csrf
+                                <div class="form-group row">
+                                    <label for="exampleInputEmail1" class="col-sm-3 col-form-label">Pilih Tanggal</label>
+                                    <div class="col-sm-9">
+                                        <input value="{{ old('tanggal') }}" type="date" name="tanggal[]"
+                                            class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            placeholder="Pilih Tanggal">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="id_pegawai" class="col-sm-3 col-form-label">Sales Yang Proses</label>
+                                    <div class="col-sm-9">
+                                        <select name="id_pegawai[]" class="form-control">
+                                            @foreach ($masterpegawai as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="exampleInputPassword1" class="col-sm-3 col-form-label">Area</label>
+                                    <div class="col-sm-9">
+                                        <input value="{{ $item->area }}" type="text" name="area[]"
+                                            class="form-control" id="exampleInputPassword1" placeholder="Masukan Area"
+                                            required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="exampleInputPassword1" class="col-sm-3 col-form-label">Chanel</label>
+                                    <div class="col-sm-9">
+                                        <select name="chanel[]" class="form-control" id="exampleInputPassword1" required>
+                                            <option value="MT MODERN TRATE" {{ $item->chanel == 'MT MODERN TRATE' ? 'selected' : '' }}>MT MODERN TRATE</option>
+                                            <option value="GENERAL TRATE" {{ $item->chanel == 'GENERAL TRATE' ? 'selected' : '' }}>GENERAL TRATE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="exampleInputPassword1" class="col-sm-3 col-form-label">Call</label>
+                                    <div class="col-sm-9">
+                                        <input value="{{ $item->call }}" type="number" name="call[]"
+                                            class="form-control" id="exampleInputPassword1" placeholder="Masukan Call"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="exampleInputPassword1" class="col-sm-3 col-form-label">Akumulasi EC</label>
+                                    <div class="col-sm-9">
+                                        <input value="{{ $item->akumulasiec }}" type="number" name="akumulasiec[]"
+                                            class="form-control" id="exampleInputPassword1" placeholder="Masukan Akumulasi EC"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="exampleInputPassword1" class="col-sm-3 col-form-label">Target Harian</label>
+                                    <div class="col-sm-9">
+                                        <input value="{{ $item->targetharian }}" type="number" name="targetharian[]"
+                                            class="form-control" id="exampleInputPassword1" placeholder="Masukan Target Harian"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="exampleInputPassword1" class="col-sm-3 col-form-label">Akumulasi Penjualan</label>
+                                    <div class="col-sm-9">
+                                        <input value="{{ $item->aktualharian }}" type="number" name="aktualharian[]"
+                                            class="form-control" id="exampleInputPassword1" placeholder="Masukan Akumulasi Penjualan"
+                                            required>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Nama Sales</label>
-                                <select name="id_pegawai" class="form-control">
-                                    @foreach ($masterpegawai as $item)
-                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                                    @endforeach
-                                </select>
+
+                            <div id="newrow">
+
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Area</label>
-                                <input value="{{ $item->area }}" type="text" name="area"
-                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Area"
-                                    required>
+
+                            <!-- Action button -->
+                            <div class="container">
+                                <div class="row justify-content-end mb-4">
+                                    <div class="col-auto">
+                                        <button type="button" name="name" id="addrow" class="btn btn-primary">
+                                            Add More
+                                        </button>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn btn-success">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Channel</label>
-                                <select name="chanel" class="form-control" id="exampleInputPassword1" required>
-                                    <option value="MT MODERN TRATE" {{ $item->chanel == 'MT MODERN TRATE' ? 'selected' : '' }}>MT MODERN TRATE</option>
-                                    <option value="GENERAL TRATE" {{ $item->chanel == 'GENERAL TRATE' ? 'selected' : '' }}>GENERAL TRATE</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Call</label>
-                                <input value="{{ $item->call }}" type="number" name="call"
-                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Call Hari ini"
-                                    required>
-                            </div>
-                            {{-- <div class="form-group">
-                                <label for="exampleInputPassword1">EC</label>
-                                <input value="{{ $item->ec }}" type="number" name="ec"
-                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan EC Hari Ini"
-                                    required>
-                            </div> --}}
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Akumulasi EC</label>
-                                <input value="{{ $item->akumulasiec }}" type="number" name="akumulasiec"
-                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Akumulasi EC"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Target Harian</label>
-                                <input value="{{ $item->targetharian }}" type="number" name="targetharian"
-                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Target Harian"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Akumulasi Penjualan</label>
-                                <input value="{{ $item->aktualharian }}" type="number" name="aktualharian"
-                                    class="form-control" id="exampleInputPassword1" placeholder="Masukan Aktual Harian"
-                                    required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -87,6 +119,92 @@
         </div>
     </div>
 </body>
+
+<script src="{{ url('https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js') }}"></script>
+    <script>
+        $('#addrow').click(function() {
+            var html = '';
+            html +=
+                `
+            <div class="card-body hapus">
+                <div class="form-group row">
+                                    <label for="exampleInputEmail1" class="col-sm-3 col-form-label">Pilih Tanggal</label>
+                                    <div class="col-sm-9">
+                                        <input value="{{ old('tanggal') }}" type="date" name="tanggal[]"
+                                            class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            placeholder="Pilih Tanggal">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="id_pegawai" class="col-sm-3 col-form-label">Sales Yang Proses</label>
+                                    <div class="col-sm-9">
+                                        <select name="id_pegawai[]" class="form-control">
+                                            @foreach ($masterpegawai as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="exampleInputPassword1" class="col-sm-3 col-form-label">Area</label>
+                                    <div class="col-sm-9">
+                                        <input value="{{ $item->area }}" type="text" name="area[]"
+                                            class="form-control" id="exampleInputPassword1" placeholder="Masukan Area"
+                                            required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="exampleInputPassword1" class="col-sm-3 col-form-label">chanel</label>
+                                    <div class="col-sm-9">
+                                        <select name="chanel[]" class="form-control" id="exampleInputPassword1" required>
+                                            <option value="MT MODERN TRATE" {{ old('chanel') == 'MT MODERN TRATE' ? 'selected' : '' }}>MT MODERN TRATE</option>
+                                            <option value="GENERAL TRATE" {{ old('chanel') == 'GENERAL TRATE' ? 'selected' : '' }}>GENERAL TRATE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="exampleInputPassword1" class="col-sm-3 col-form-label">Call</label>
+                                    <div class="col-sm-9">
+                                        <input value="{{ $item->call }}" type="number" name="call[]"
+                                            class="form-control" id="exampleInputPassword1" placeholder="Masukan Call"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="exampleInputPassword1" class="col-sm-3 col-form-label">Akumulasi EC</label>
+                                    <div class="col-sm-9">
+                                        <input value="{{ $item->akumulasiec }}" type="number" name="akumulasiec[]"
+                                            class="form-control" id="exampleInputPassword1" placeholder="Masukan Alamat"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="exampleInputPassword1" class="col-sm-3 col-form-label">Target Harian</label>
+                                    <div class="col-sm-9">
+                                        <input value="{{ $item->targetharian }}" type="number" name="targetharian[]"
+                                            class="form-control" id="exampleInputPassword1" placeholder="Masukan Alamat"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="exampleInputPassword1" class="col-sm-3 col-form-label">Akumulasi Penjualan</label>
+                                    <div class="col-sm-9">
+                                        <input value="{{ $item->aktualharian }}" type="number" name="aktualharian[]"
+                                            class="form-control" id="exampleInputPassword1" placeholder="Masukan Alamat"
+                                            required>
+                                    </div>
+                                </div>
+                <button type="button" class="btn btn-danger mt-lg-5 remove-table-row">Remove</button>
+            </div>`;
+
+            $('#newrow').append(html);
+        });
+
+        $(document).on('click', '.remove-table-row', function() {
+            $(this).closest('.hapus').remove();
+        });
+    </script>
 
 
 

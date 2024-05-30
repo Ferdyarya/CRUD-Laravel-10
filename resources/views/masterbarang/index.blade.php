@@ -46,14 +46,14 @@
             </div>
 
             {{-- Button Export PDF --}}
-            <div class="col-auto">
+            {{-- <div class="col-auto">
                 <a href="{{ route('masterbarang.create')}}" class="btn btn-success">
                     Tambah Data
                 </a>
-                {{-- <a href="{{ route('masterbarangpdf')}}" class="btn btn-danger">
+                <a href="{{ route('masterbarangpdf')}}" class="btn btn-danger">
                     Export PDF
-                </a> --}}
-            </div>
+                </a>
+            </div> --}}
         </div>
 
         <div>

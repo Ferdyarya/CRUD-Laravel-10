@@ -8,6 +8,7 @@ use App\Models\Mastersupplier;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BrgmasukController;
+use App\Http\Controllers\BrgreturController;
 use App\Http\Controllers\BrgkeluarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MastertokoController;
@@ -49,6 +50,7 @@ Route::prefix('dashboard')->middleware(['auth:sanctum'])->group(function() {
     Route::resource('brgmasuk', BrgmasukController::class);
     Route::resource('brgkeluar', BrgkeluarController::class);
     Route::resource('laporanharian', LaporanharianController::class);
+    Route::resource('brgretur', BrgreturController::class);
 
 
 
@@ -59,6 +61,7 @@ Route::get('mastertokopdf', [MasterpegawaiController::class, 'mastertokopdf'])->
 Route::get('mastersupplierpdf', [MastersupplierController::class, 'mastersupplierpdf'])->name('mastersupplierpdf');
 Route::get('masterbarangpdf', [MastersupplierController::class, 'masterbarangpdf'])->name('masterbarangpdf');
 Route::get('laporanharianpdf', [LaporanharianController::class, 'laporanharianpdf'])->name('laporanharianpdf');
+Route::get('brgreturpdf', [BrgreturController::class, 'brgreturpdf'])->name('brgreturpdf');
 
 
 
@@ -67,6 +70,7 @@ Route::get('pendafoutlitepdf', [PendafoutliteController::class, 'pendafoutlitepd
 Route::get('brgmasukpdf', [BrgmasukController::class, 'brgmasukpdf'])->name('brgmasukpdf');
 Route::get('brgkeluarpdf', [BrgkeluarController::class, 'brgkeluarpdf'])->name('brgkeluarpdf');
 Route::get('laporanharianpdf', [LaporanharianController::class, 'laporanharianpdf'])->name('laporanharianpdf');
+Route::get('brgreturpdf', [BrgreturController::class, 'brgreturpdf'])->name('brgreturpdf');
 // Route::get('pernamapdf', [LaporanharianController::class, 'pernamapdf'])->name('pernamapdf');
 
 
@@ -79,12 +83,19 @@ Route::get('laporansales/laporanoutlet', [PendafoutliteController::class, 'cetak
 Route::get('laporansales/laporanbrgmasuk', [BrgmasukController::class, 'cetakbarangpertanggal'])->name('laporanbrgmasuk');
 Route::get('laporansales/laporanorderan', [BrgkeluarController::class, 'cetakbrgkeluarpertanggal'])->name('laporanorderan');
 Route::get('laporansales/laporanhariansales', [LaporanharianController::class, 'cetakhariansalespertanggal'])->name('laporanhariansales');
+Route::get('laporansales/laporanbrgretur', [BrgreturController::class, 'cetakbrgreturpertanggal'])->name('laporanbrgretur');
+
+Route::get('laporansales/invoicepdf', [BrgkeluarController::class, 'invoicepdf'])->name('invoicepdf');
+Route::get('laporansales/suratjalanpdf', [BrgkeluarController::class, 'suratjalanpdf'])->name('suratjalanpdf');
+Route::get('invoicepdf/{filter}', [BrgkeluarController::class, 'invoicepdf'])->name('invoicepdf');
+Route::get('suratjalanpdf/{filter}', [BrgkeluarController::class, 'suratjalanpdf'])->name('suratjalanpdf');
 
 // Filtering
 Route::get('laporanoutlet', [PendafoutliteController::class, 'filterdate'])->name('laporanoutlet');
 Route::get('laporanbrgmasuk', [BrgmasukController::class, 'filterdatebarang'])->name('laporanbrgmasuk');
 Route::get('laporanorderan', [BrgkeluarController::class, 'filterdatebrgkeluar'])->name('laporanorderan');
 Route::get('laporanhariansales', [LaporanharianController::class, 'filterdatehariansales'])->name('laporanhariansales');
+Route::get('laporanbrgretur', [BrgreturController::class, 'filterdatebrgretur'])->name('laporanbrgretur');
 
 
 
@@ -94,6 +105,7 @@ Route::get('laporanoutletpdf/filter={filter}', [PendafoutliteController::class, 
 Route::get('laporanbrgmasukpdf/filter={filter}', [BrgmasukController::class, 'laporanbrgmasukpdf'])->name('laporanbrgmasukpdf');
 Route::get('laporanorderanpdf/filter={filter}', [BrgkeluarController::class, 'laporanorderanpdf'])->name('laporanorderanpdf');
 Route::get('laporanhariansalespdf/filter={filter}', [LaporanharianController::class, 'laporanhariansalespdf'])->name('laporanhariansalespdf');
+Route::get('laporanbrgreturpdf/filter={filter}', [BrgreturController::class, 'laporanbrgreturpdf'])->name('laporanbrgreturpdf');
 
 
 });

@@ -39,11 +39,11 @@
     <div class="container">
         {{-- search --}}
         <div class="row g-3 align-items-center mb-4">
-            <div class="col-auto">
+            {{-- <div class="col-auto">
                 <form action="pendafoutlite" method="GET">
                     <input type="text" id="search" name="search" class="form-control" placeholder="Search">
                 </form>
-            </div>
+            </div> --}}
 
             {{-- Button Export PDF --}}
             <div class="col-auto row">

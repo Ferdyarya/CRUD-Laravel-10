@@ -45,7 +45,17 @@ class BrgmasukController extends Controller
     {
         $data = $request->all();
 
-        $data = Brgmasuk::create($request->all());
+    $perulanganInput = count($data["tanggal"]);
+
+    for ($i = 0; $i < $perulanganInput; $i++) {
+        Brgmasuk::create([
+            'tanggal' => $data["tanggal"][$i],
+            'id_supplier' => $data["id_supplier"][$i],
+            'kodebarang' => $data["kodebarang"][$i],
+            'namabarang' => $data["namabarang"][$i],
+            'qty' => $data["qty"][$i],
+        ]);
+    }
 
         return redirect()->route('brgmasuk.index')->with('success', 'Data Telah ditambahkan');
     }

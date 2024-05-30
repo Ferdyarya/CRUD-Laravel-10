@@ -16,12 +16,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Laporan Harian</h1>
+                    <h1 class="m-0">Barang Retur</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Laporan Harian Sales</li>
+                        <li class="breadcrumb-item active">Barang Retur</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -40,17 +40,17 @@
         {{-- search --}}
         <div class="row g-3 align-items-center mb-4">
             <div class="col-auto">
-                <form action="laporanharian" method="GET">
+                <form action="brgretur" method="GET">
                     <input type="text" id="search" name="search" class="form-control" placeholder="Search">
                 </form>
             </div>
 
             {{-- Button Export PDF --}}
             <div class="col-auto">
-                <a href="{{ route('laporanharian.create')}}" class="btn btn-success">
+                <a href="{{ route('brgretur.create')}}" class="btn btn-success">
                     Tambah Data
                 </a>
-                {{-- <a href="{{ route('laporanharianpdf')}}" class="btn btn-danger">
+                {{-- <a href="{{ route('brgreturpdf')}}" class="btn btn-danger">
                     Export PDF
                 </a> --}}
             </div>
@@ -62,14 +62,11 @@
                     <tr>
                         <th class="px-6 py-6">No</th>
                         <th class="px-6 py-6">Tanggal</th>
-                        <th class="px-6 py-6">Nama Sales</th>
-                        <th class="px-6 py-6">Area</th>
-                        <th class="px-6 py-6">Chanel</th>
-                        <th class="px-6 py-6">Call</th>
-                        <th class="px-6 py-6">Akumulasi EC</th>
-                        <th class="px-6 py-6">Target Harian</th>
-                        <th class="px-6 py-6">Akumulasi Penjualan</th>
-                        {{-- <th class="px-6 py-6">EC</th> --}}
+                        <th class="px-6 py-6">Nama Barang</th>
+                        <th class="px-6 py-6">Nama Customer</th>
+                        <th class="px-6 py-6">Nama Sales Pemegang</th>
+                        <th class="px-6 py-6">Keluhan</th>
+                        <th class="px-6 py-6">Qty</th>
                         <th class="px-6 py-6">Action</th>
                     </tr>
                 </thead>
@@ -77,36 +74,33 @@
                     @php
                     $no=1;
                     @endphp
-                    @foreach ($laporanharian as $index => $item)
+                    @foreach ($brgretur as $index => $item)
                     <tr>
-                        <th class="px-6 py-6">{{ $index + $laporanharian->firstItem() }}</th>
+                        <th class="px-6 py-6">{{ $index + $brgretur->firstItem() }}</th>
                         <td class="px-6 py-6">
                             {{ \Carbon\Carbon::parse($item->tanggal)->format('d-M-Y') }}
                         </td>
+                        <td class="px-6 py-6">{{ $item->masterbarang->namabarang }}</td>
+                        <td class="px-6 py-6">{{ $item->mastertoko->namatoko }}</td>
                         <td class="px-6 py-6">{{ $item->masterpegawai->nama }}</td>
-                        <td class="px-6 py-6">{{ $item->area }}</td>
-                        <td class="px-6 py-6">{{ $item->chanel }}</td>
-                        <td class="px-6 py-6">{{ $item->call }}</td>
-                        <td class="px-6 py-6">{{ $item->akumulasiec }}</td>
-                        <td class="px-6 py-6">Rp. {{ number_format($item->targetharian) }}</td>
-                        <td class="px-6 py-6">Rp. {{ number_format($item->aktualharian) }}</td>
-                        {{-- <td class="px-6 py-6">{{ $item->ec }}</td> --}}
+                        <td class="px-6 py-6">{{ $item->keluhan }}</td>
+                        <td class="px-6 py-6">{{ $item->qty }}</td>
                         <td>
-                            <a href="{{ route('laporanharian.edit', $item->id)}}" class="btn btn-primary btn-block">
+                            <a href="{{ route('brgretur.edit', $item->id)}}" class="btn btn-primary">
                                 Edit
                             </a>
-                            <form action="{{ route('laporanharian.destroy', $item->id) }}" method="POST"
+                            <form action="{{ route('brgretur.destroy', $item->id) }}" method="POST"
                                 style="display:inline;">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-danger btn-block mt-2">Hapus</button>
+                                <button type="submit" class="btn btn-danger">Hapus</button>
                             </form>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-            {{ $laporanharian->links() }}
+            {{ $brgretur->links() }}
         </div>
     </div>
 </div>

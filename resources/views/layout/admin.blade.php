@@ -307,6 +307,14 @@
                                     </a>
                                 </li>
                                 @endif
+                                @if (Auth::user()->hakakses('supervisor')|| Auth::user()->hakakses('sales'))
+                                <li class="nav-item">
+                                    <a href="{{ route('brgretur.index')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Barang Retur</p>
+                                    </a>
+                                </li>
+                                @endif
                             </ul>
                         </li>
 
@@ -355,6 +363,14 @@
                                     <a href="{{ route('laporanhariansales')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Laporan Harian</p>
+                                    </a>
+                                </li>
+                                @endif
+                                @if (Auth::user()->hakakses('supervisor')|| Auth::user()->hakakses('admin')|| Auth::user()->hakakses('sales'))
+                                <li class="nav-item">
+                                    <a href="{{ route('laporanbrgretur')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Barang Retur</p>
                                     </a>
                                 </li>
                                 @endif
